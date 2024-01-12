@@ -76,17 +76,6 @@ export default function Posts({ posts }) {
                     <span>votes</span>
                   </div>
                   <div className="all-option">
-                    {(() => {
-                      {noOfAns.find(answer => answer.questionid === question._id) ? (
-                        <p>{noOfAns.filter(answer => answer.questionid === question._id).length}</p>
-                      ) : (
-                        <>0</>
-                      )}
-                      
-                    })()}
-                    <span>Answers</span>
-                  </div>
-                  <div className="all-option">
                     {/* <small>0 views</small> */}
                   </div>
                 </div>

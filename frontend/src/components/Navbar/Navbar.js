@@ -82,7 +82,7 @@ export default function Navbar() {
           <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll" style={{ bsSscrollHheight: "100px" }}>
             <li className="nav-item dropdown" >
               <NavLink className="nav-link dropdown-toggle" to="/" id="navbarScrollingDropdown" role="button" aria-expanded="false" style={{ color: 'black' }}>
-                Products
+                Options
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{ color: 'black' }}>
                 <li><NavLink className="dropdown-item" to="/questions">Questions</NavLink></li>
