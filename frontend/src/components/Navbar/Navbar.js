@@ -73,7 +73,7 @@ export default function Navbar() {
         <div className="container-fluid">
           <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black', paddingTop: "10px" }}>
             <NavLink to="/" style={iconstyle}>
-              &nbsp;<i style={title}>Mate</i><b>s</b>
+              &nbsp;<i style={title}>Doubt</i><b>out</b>
             </NavLink>
           </div>
 
