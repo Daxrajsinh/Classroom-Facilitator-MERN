@@ -12,6 +12,7 @@ import UserQuestionContent from './components/MyProfile/Profile/Content';
 import MyQuestions from './components/MyProfile/MyQuestions/MyQuestions';
 import MyAnswers from './components/MyProfile/MyAnswers/MyAnswers';
 import Search from './components/Questions/Search';
+import Classroom from './components/Questions/Classroom';
 
 function App() {
   return (
@@ -23,9 +24,11 @@ function App() {
         <Route path = "/" element = {<Homepage/>}/>
      
         <Route path = "/editor" element = {<Editor/>}/>
+        {/* <Route path = "/classroom" element={<Classroom/>}/> */}
         <Route path = "/login" element = {<Login/>}/>
         <Route path = "/register" element = {<Register/>}/>
         <Route path="/questions" element = {<Questions />}></Route>
+        <Route path="/classroom/:tagName" element={<Classroom />}></Route>
         <Route path="/question/:type" element = {<Content />}></Route>
         <Route path="/answer/:type" element = {<UserQuestionContent />}></Route>
 

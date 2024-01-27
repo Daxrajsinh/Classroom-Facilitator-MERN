@@ -94,3 +94,65 @@
      right: 35px;
      z-index: 1;
   }
+
+  /* Add this CSS to your existing questions.css file */
+
+/* Style for the container holding the tags */
+.main-tabs {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* Style for individual tag boxes */
+.main-tab {
+  margin-right: 10px;
+  margin-bottom: 10px;
+}
+
+/* Style for tag links */
+.main-tab a {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: #f0f0f0;
+  color: #333;
+  text-decoration: none;
+  border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover effect for tag links */
+.main-tab a:hover {
+  background-color: #ddd;
+}
+
+/* Style for pagination container */
+.container {
+  margin-top: 20px;
+}
+
+/* Style for pagination links */
+.pagination {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+}
+
+/* Style for individual pagination links */
+.pagination li {
+  display: inline;
+  margin-right: 5px;
+}
+
+/* Style for active pagination link */
+.pagination li.active a {
+  background-color: #007bff;
+  color: #fff;
+  padding: 6px 12px;
+  border-radius: 4px;
+}
+
+/* Style for disabled pagination link */
+.pagination li.disabled a {
+  color: #6c757d;
+  cursor: not-allowed;
+}

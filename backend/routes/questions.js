@@ -235,6 +235,48 @@ router.post('/fetchUserFilteredQuestions', async (req, res) => {
     }
 })
 
+/// Fetch answered questions by tag
+router.post("/answeredQueByTag/:name", async (req, res) => {
+    try {
+        const tagName = req.params.name;
+        const answers = await Answer.find();
+        const questions = await Question.find({ tags: tagName });
+
+        const answeredQuestionIds = answers.map(ans => ans.questionid);
+
+        const answeredQuestions = questions.filter(que => answeredQuestionIds.includes(que._id.toString()));
+
+        res.json(answeredQuestions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// Fetch unanswered questions by tag
+router.post("/unansweredQueByTag/:name", async (req, res) => {
+    try {
+        const tagName = req.params.name;
+        const answers = await Answer.find();
+        const questions = await Question.find({ tags: tagName });
+
+        const answeredQuestionIds = answers.map(ans => ans.questionid);
+
+        const unansweredQuestions = questions.filter(que => !answeredQuestionIds.includes(que._id.toString()));
+
+        res.json(unansweredQuestions);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+// Fetch questions sorted by votes by tag
+router.post("/fetchQueByHigherVotesByTag/:name", async (req, res) => {
+    const tagName = req.params.name;
+    const questions = await Question.find({ tags: tagName }).sort({ votes: -1 });
+    res.json(questions);
+});
 
 
 //for getting all tags used by all.

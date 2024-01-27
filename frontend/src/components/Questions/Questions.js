@@ -7,12 +7,14 @@ import { FilterList } from '@mui/icons-material';
 import '../Header/header.css';
 import Posts from './Posts';
 import Pagination from './Pagination';
+import Classroom from './Classroom';
 
 export default function Questions() {
 
     // const navigate = useNavigate();
     const [questions, setQuestions] = useState([])
-
+    const [tags, setTags] = useState([])
+    const [selectedTag, setSelectedTag] = useState(null);
 
     // for pagination
     const [postPerPage] = useState(4);
@@ -72,8 +74,50 @@ export default function Questions() {
         }).then(data => setQuestions(data))
     }
 
+    const fetchAlltags = async () => {
+        try {
+            const response = await fetch("http://localhost:8000/api/question/usedtags", {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            if (!response.ok) {
+                throw new Error('Failed to fetch tags');
+            }
+            
+            const data = await response.json();
+            setTags(data);
+            console.log(data);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+    const fetchQuestionsByTag = async (tagName) => {
+        try {
+            const response = await fetch(`http://localhost:8000/api/question/fetchQuePertag/${tagName}`, {
+                method: "POST",
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to fetch questions by tag');
+            }
+
+            const data = await response.json();
+            setQuestions(data);
+            setSelectedTag(tagName);
+        } catch (error) {
+            console.error(error);
+        }
+    };
+
     useEffect(() => {
-        fetchAllQuestions();
+        fetchAlltags();
+        // fetchAllQuestions();
         // FindFrequencyOfAns();
         // fetchVotes();
 
@@ -88,79 +132,37 @@ export default function Questions() {
 
     return (
         <>
-            <div Style="height:100%; margin-top:13vh; z-index:1; background-color:white">
-                <div class="">
-
-
-                    <div className="stack-index">
-                        <div className="stack-index-content" >
-                            <Sidebar />
-
-
-                            <div className="main">
-                                <div className="main-container">
-                                    <div className="main-top">
-                                        <h2>All Questions</h2>
-                                        <NavLink to="/editor"><button>Ask Question</button></NavLink>
-                                    </div>
-
-                                    <div className='main-desc'>
-                                        <p>{questions.length} Questions</p>
-                                        <div className="main-filter">
-                                            <div className="main-tabs">
-                                                <div className="main-tab">
-                                                    <NavLink className="tab" onClick={answeredQuestions}>Answered</NavLink>
-                                                </div>
-                                                <div className="main-tab">
-                                                    <NavLink onClick={sortByVotes}>Votes</NavLink>
-                                                </div>
-                                                <div className="main-tab">
-                                                    <NavLink onClick={unansweredQuestions}>Unanswered</NavLink>
-                                                </div>
-                                            </div>
-
-                                            {/* filter functionality */}
-                                            {/* <div className="main-filter-item" onClick={(e) => {
-                                                e.persist();
-                                                setShowFilter(!showFilter);
-
-                                            }
-                                            }> */}
-                                                {/* <FilterList style={{ fontSize: '21px' }} />
-                                                <p className="filter-text">Filter</p>
-                                            </div>
-
-                                            {
-                                                showFilter && (
-                                                    <div className="filter_main">
-                                                        <div className="card3">
-                                                            <p>tag</p>
-                                                            <p>answered</p>
-                                                            <p>unanswered</p>
-                                                            <p>4</p>
-                                                        </div>
-                                                    </div>
-                                                )
-                                            } */}
-                                        </div>
-                                    </div>
-                                    {/* This displays all questions */}
-                                    <div className="questions">
-                                        <div className="question">
-                                            <Posts posts={currentPosts} />
-                                        </div>
-
-                                    </div>
-                                    <div className="container">
-
-                                        <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
-                                    </div>
-
-                                </div>
-                            </div>
-
-                        </div>
+            <div style={{ height: "100%", marginTop: "13vh", zIndex: 1, backgroundColor: "white" }}>
+        <div className="">
+          <div className="stack-index">
+            <div className="stack-index-content">
+              <Sidebar />
+              <div className="main">
+                <div className="main-container">
+                  <div className="main-top">
+                    <h2>All Classrooms</h2>
+                  </div>
+                  <div className='main-desc'>
+                    <div className="main-filter">
+                      <div className="main-tabs">
+                        {tags.map(tag => (
+                          <div key={tag} className="main-tab">
+                            <NavLink to={`/classroom/${tag}`}>{tag}</NavLink>
+                          </div>
+                        ))}
+                      </div>
                     </div>
+                  </div>
+                  {/* Pagination component */}
+                  <div className="container">
+                    <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
                     {/* 
                     <div class="d-flex flex-column flex-shrink-0 p-3 col-md-7" Style="background-color:white;">
                         <div className="d-flex d-flex-row align-items-center">
@@ -216,10 +218,6 @@ export default function Questions() {
 
 
                     </div> */}
-                </div>
-
-
-            </div>
         </>
 
     )
