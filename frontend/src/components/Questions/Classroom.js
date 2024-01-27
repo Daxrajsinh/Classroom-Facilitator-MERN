@@ -91,7 +91,7 @@ export default function Classroom() {
                 <div className="main-filter">
                   <div className="main-tabs">
                     <div className="main-tab">
-                      <NavLink className="tab" onClick={answeredQuestions}>Answered</NavLink>
+                      <NavLink onClick={answeredQuestions}>Answered</NavLink>
                     </div>
                     <div className="main-tab">
                       <NavLink onClick={sortByVotes}>Votes</NavLink>

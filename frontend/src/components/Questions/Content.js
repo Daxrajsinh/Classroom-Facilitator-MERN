@@ -91,35 +91,30 @@ export default function Content(props) {
 
 
     const handleSubmit = async (e, id) => {
-
-
         e.preventDefault();
         const response = await fetch(`http://localhost:8000/api/answer/addanswer/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-
-
             body: JSON.stringify({ answer: value }),
         });
-
-
-        const json = await response.json()
-
-
-
-
+    
+        const json = await response.json();
+    
         if (json["status"] === true) {
+            // Update state to indicate that the question has been answered
             setState(true);
             setValue("");
-            window.scrollTo(0, 0)
+    
+            // Trigger a refetch of answers to update the UI
+            fetchAnswers(id);
+    
+            // Scroll to the top of the page
+            window.scrollTo(0, 0);
         }
-
-
-
-
     }
+    
 
 
     const upvoteQue = async (e, id) => {

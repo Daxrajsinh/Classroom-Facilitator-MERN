@@ -239,13 +239,19 @@ router.post('/fetchUserFilteredQuestions', async (req, res) => {
 router.post("/answeredQueByTag/:name", async (req, res) => {
     try {
         const tagName = req.params.name;
+        
+        // Find all answers for the given tag
         const answers = await Answer.find();
+        
+        // Find all questions with the given tag
         const questions = await Question.find({ tags: tagName });
-
-        const answeredQuestionIds = answers.map(ans => ans.questionid);
-
+        
+        // Get the IDs of answered questions
+        const answeredQuestionIds = answers.map(ans => ans.questionid.toString());
+        
+        // Filter questions to include only those that have been answered
         const answeredQuestions = questions.filter(que => answeredQuestionIds.includes(que._id.toString()));
-
+        
         res.json(answeredQuestions);
     } catch (error) {
         console.error(error.message);
@@ -253,17 +259,26 @@ router.post("/answeredQueByTag/:name", async (req, res) => {
     }
 });
 
+
+
+
 // Fetch unanswered questions by tag
 router.post("/unansweredQueByTag/:name", async (req, res) => {
     try {
         const tagName = req.params.name;
+        
+        // Find all answers for the given tag
         const answers = await Answer.find();
+        
+        // Find all questions with the given tag
         const questions = await Question.find({ tags: tagName });
-
-        const answeredQuestionIds = answers.map(ans => ans.questionid);
-
+        
+        // Get the IDs of answered questions
+        const answeredQuestionIds = answers.map(ans => ans.questionid.toString());
+        
+        // Filter questions to include only those that have not been answered
         const unansweredQuestions = questions.filter(que => !answeredQuestionIds.includes(que._id.toString()));
-
+        
         res.json(unansweredQuestions);
     } catch (error) {
         console.error(error.message);
@@ -454,14 +469,7 @@ router.post("/search", async (req, res) => {
     // const apifeature = new ApiFeatures(Question.find(), req.query).search().filter();
 
     try {
-        //const jobs = await Job.find();
-        // console.log(req.query.keyword);
-        let questions = await Question.find({"title": {$regex : req.query.keyword, $options: "i"}});
-
-        if(questions.length === 0)
-        {
-            questions = await Question.find({"tags": {$regex : req.query.keyword, $options: "i"}});
-        }
+        questions = await Question.find({"tags": {$regex : req.query.keyword, $options: "i"}});
         res.json(questions);
 
     }
