@@ -295,7 +295,6 @@ router.post("/fetchQueByHigherVotesByTag/:name", async (req, res) => {
 
 
 //for getting all tags used by all.
-
 router.post("/usedtags", async(req, res)=>{
     try{
         
@@ -320,30 +319,43 @@ router.post("/usedtags", async(req, res)=>{
 })
 
 //for getting all tags used by user.
+router.post("/usedtags/:username", async (req, res) => {
+    try {
+        const user = await User.findOne({ username: req.params.username });
 
-router.post("/usedtags/:username", async(req, res)=>{
-    try{
-        
-        let user = await User.findOne({ username: req.params.username });
-        const questions = await Question.find({
-            user: user._id
-        });
+        // Find questions asked by the user
+        const questionsAsked = await Question.find({ user: user._id });
+
+        // Find answers authored by the user
+        const answersProvidedByUser = await Answer.find({ user: user._id });
 
         const tags = [];
 
-        questions.map(que => {
-            que.tags.split(" ").map(tag => {
-                if (tags.indexOf(tag)==-1) tags.push(tag);
-            })
-        })
+        // Extract tags from questions asked by the user
+        questionsAsked.forEach(question => {
+            question.tags.split(" ").forEach(tag => {
+                if (!tags.includes(tag)) {
+                    tags.push(tag);
+                }
+            });
+        });
+
+        // Extract tags from answers provided by the user
+        answersProvidedByUser.forEach(answer => {
+            answer.tags.forEach(tag => {
+                if (!tags.includes(tag)) {
+                    tags.push(tag);
+                }
+            });
+        });
 
         res.json(tags);
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
     }
-    catch(e)
-    {
-        res.status(400).send("Internal Server Error");
-    }
-})
+});
+
 
 router.post("/upvote/:id", async (req, res) => {
     try {
@@ -478,5 +490,6 @@ router.post("/search", async (req, res) => {
         res.status(500).send("Internal server error");
     }
 })
+
 
 module.exports = router
