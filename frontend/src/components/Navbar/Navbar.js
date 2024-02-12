@@ -21,6 +21,7 @@ export default function Navbar() {
   const navigate = useNavigate();
   const [loginStatus, setLoginStatus] = useState(false);
 //   const [show, setShow] = useState(false);
+const [userTags, setUserTags] = useState([]);
 
   const isLoggedin = () => {
     if (localStorage.getItem('username') !== null) {
@@ -42,25 +43,45 @@ export default function Navbar() {
     navigate("/");
   }
 
-  const searchQuestion = async (e) => {
+  const fetchUserTags = async () => {
+    try {
+        const username = localStorage.getItem('username');
+        // Fetch tags based on user's activity (answered or asked questions)
+        const response = await fetch(`http://localhost:8000/api/question/usedtags/${username}`, {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
 
+        if (!response.ok) {
+            throw new Error('Failed to fetch user tags');
+        }
+
+        const data = await response.json();
+        setUserTags(data);
+        // console.log(data.length)
+    } catch (error) {
+        console.error(error);
+    }
+};
+
+  const searchQuestion = async (e) => {
     e.preventDefault();
     const que = document.getElementById('searchQue').value;
-
-    
-    await fetch(`http://localhost:8000/api/question/search?keyword=${que}`, {
+    await fetchUserTags(); // Function to get user tags, implement as per your requirement
+  
+    await fetch("http://localhost:8000/api/question/search", {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
-      }
+      },
+      body: JSON.stringify({ keyword: que, userTags })
     }).then(response => {
       return response.json();
     }).then(questions => {
-
       navigate("/search", { state: questions });
-      // setQuestions(data);
-    })
-
+    });
   }
 
   useEffect(() => {

@@ -13,8 +13,6 @@ const mongoose = require('mongoose')
 
 // var jwt = require('jsonwebtoken');
 
-// const JWT_SECRET = 'Darshitisagoodboy';
-
 const router = express.Router();
 
 router.post('/addquestion', fetchuser, async (req, res) => {
@@ -478,18 +476,25 @@ router.post("/unansweredQue", async (req, res) => {
 
 // search questions
 router.post("/search", async (req, res) => {
-    // const apifeature = new ApiFeatures(Question.find(), req.query).search().filter();
-
     try {
-        questions = await Question.find({"tags": {$regex : req.query.keyword, $options: "i"}});
-        res.json(questions);
+        const { keyword, userTags } = req.body; // Extract search keyword and user tags
+        const regex = new RegExp(keyword, "i"); // Create a case-insensitive regular expression for the keyword
 
-    }
-    catch (e) {
+        const userQuestions = await Question.find({ 
+            tags: { $in: userTags },
+            $or: [
+                { title: { $regex: regex } }, // Match keyword in the title field
+                { question: { $regex: regex } } // Match keyword in the question field
+            ]
+        });
+
+        res.json(userQuestions);
+    } catch (e) {
         console.log(e.message);
         res.status(500).send("Internal server error");
     }
-})
+});
+
 
 
 module.exports = router
