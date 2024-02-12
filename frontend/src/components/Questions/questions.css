@@ -156,3 +156,20 @@
   color: #6c757d;
   cursor: not-allowed;
 }
+
+.class-box {
+  background-color: #f0f0f0;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  margin: 20px;
+  width: 200px;
+  height: 200px;
+  font-size: 30px;
+ 
+}
+.class-box h2 {
+  font-size: 18px;
+  margin-top: 0;
+  margin-bottom: 10px;
+}

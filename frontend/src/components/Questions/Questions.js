@@ -178,7 +178,7 @@ export default function Questions() {
 
                         {/* for users */}
                         {userTags.map(tag => (
-                            <div key={tag} className="main-tab">
+                            <div key={tag} className="class-box">
                                 <NavLink to={`/classroom/${tag}`}>{tag}</NavLink>
                             </div>
                         ))}
