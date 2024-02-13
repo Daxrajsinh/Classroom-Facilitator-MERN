@@ -31,17 +31,15 @@ const [userTags, setUserTags] = useState([]);
   }
 
   const logout = () => {
-
     localStorage.removeItem('username');
     localStorage.removeItem('since');
     localStorage.removeItem('Usertype');
-
+  
     setLoginStatus(false);
-
-    window.location.reload(true);
-
-    navigate("/");
+  
+    navigate("/"); // Navigate to home
   }
+  
 
   const fetchUserTags = async () => {
     try {
@@ -118,11 +116,12 @@ const [userTags, setUserTags] = useState([]);
           </button>
           
           <div className="collapse navbar-collapse" id="navbarScroll" >
+          {loginStatus && (
             <form className="d-flex" style={{ width: 500 }} onSubmit={searchQuestion}>
               <input className="form-control me-2" id="searchQue" type="search" placeholder="Search" aria-label="Search" />
               <button className="btn btn-outline-primary" type="submit">Search</button>
-
             </form>
+          )}
             <div className="searchbar">
 
             </div>
@@ -159,7 +158,8 @@ const [userTags, setUserTags] = useState([]);
                 </li>
                   <li class="nav-item">
                     <NavLink className="nav-link" to="/register" style={{ color: 'black' }}><button className='btn btn-primary'>Register</button></NavLink>
-                  </li></>)
+                  </li></>
+                )
               }
 
             </ul>
