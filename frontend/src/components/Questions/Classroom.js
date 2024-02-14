@@ -6,16 +6,15 @@ import Posts from './Posts';
 
 export default function Classroom() {
   const { tagName } = useParams();
+  console.log(tagName)
   const [questions, setQuestions] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [postPerPage] = useState(4);
-
-  useEffect(() => {
-    fetchQuestionsByTag(tagName);
-  }, [tagName]);
+  // const [loading, setLoading] = useState(true);
 
   // Fetch questions by tag name
   const fetchQuestionsByTag = async (tagName) => {
+    console.log("Called Fetch questions by tag");
     try {
       const response = await fetch(`http://localhost:8000/api/question/fetchQuePertag/${tagName}`, {
         method: "POST",
@@ -34,6 +33,10 @@ export default function Classroom() {
       console.error(error);
     }
   };
+
+  useEffect(() => {
+    fetchQuestionsByTag(tagName);
+  }, [tagName]);
 
   // Function to sort questions by higher votes
   const sortByVotes = async () => {

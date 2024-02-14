@@ -413,17 +413,13 @@ router.post("/fetchallVotes", async (req, res) => {
 router.post("/fetchQuePertag/:name", async (req, res) => {
     // const questions = await Question.find({"tags" : {$regex : req.params.name, $options: 'i^" "$" "'}})
 
-    const questions = await Question.find();
-    const questionsPertag = [];
-
-    questions.map(que => {
-        que.tags.split(" ").map(tag => {
-            if (tag.toLowerCase() === req.params.name) {
-                questionsPertag.push(que);
-            }
-        })
-    })
-    res.json(questionsPertag);
+    try {
+        const questions = await Question.find({ tags: req.params.name });
+        res.json(questions);
+      } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Internal server error" });
+      }
 })
 
 
@@ -494,7 +490,5 @@ router.post("/search", async (req, res) => {
         res.status(500).send("Internal server error");
     }
 });
-
-
 
 module.exports = router

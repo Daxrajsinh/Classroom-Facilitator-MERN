@@ -1,175 +1,261 @@
 .all-questions{
-    display: flex;
-    width:100%;
-    padding:20px 0px;
-    border-bottom: 1px solid #eee;
+  display: flex;
+  width:100%;
+  padding:20px 0px;
+  border-bottom: 1px solid #eee;
 }
+
 
 .all-questions-container{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    width:100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width:100%;
 }
+
 
 .all-questions-left{
-    display: flex;
-    margin-right: 30px;
+  display: flex;
+  margin-right: 30px;
 }
+
 
 .all-options{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    color: rgba(0,0,0,0.7);
-    font-size: small;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: rgba(0,0,0,0.7);
+  font-size: small;
 }
+
 
 .all-option{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 10px;
 }
+
 
 .all-option > p{
-    font-size: large;
+  font-size: large;
 }
+
 
 .question-answer{
-    display: flex;
-    flex-direction: column;
-    width:100%;
+  display: flex;
+  flex-direction: column;
+  width:100%;
 }
+
 
 .question-answer> a{
-    color: #0151f0d8;
-    font-size:1.1rem;
-    margin-bottom: 10px;
+  color: #0151f0d8;
+  font-size:1.1rem;
+  margin-bottom: 10px;
 }
+
 
 .question-tags{
-    margin:10px 5px;
-    padding :5px 10px;
-    background-color: #0151f03d;
-    border-radius: 3px;
+  margin:10px 5px;
+  padding :5px 10px;
+  background-color: #0151f03d;
+  border-radius: 8px;
 }
+
 
 .author{
-    display: flex;
-    flex-direction: column;
-    margin-left: auto;
+  display: flex;
+  flex-direction: column;
+  margin-left: auto;
 }
+
 
 .author > small{
-    color:rgba(0,0,0,0.7);
-    margin-bottom: 5px;
+  color:rgba(0,0,0,0.7);
+  margin-bottom: 5px;
 }
+
 
 .author-details{
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
+
 .author-details > p{
-    margin-left: 5px;
-    font-size:small;
-    color:#0151f0d8;
+  margin-left: 5px;
+  font-size:small;
+  color:#0151f0d8;
 }
+
 
 /* css of filter pop-up and card  */
 .card3 {
-    background-color: #eee;
-    margin: 50px auto;
-    max-width: 500px;
-    text-align: center;
-    border-radius: 10px;
-    height: 22vh;
-  }
+  background-color: #eee;
+  margin: 50px auto;
+  max-width: 500px;
+  text-align: center;
+  border-radius: 10px;
+  height: 22vh;
+}
 
-  .filter_main{
-     width:10%;
-     position: absolute;
-     top: 190px;
-     right: 35px;
-     z-index: 1;
-  }
 
-  /* Add this CSS to your existing questions.css file */
+.filter_main{
+   width:6%;
+   position: absolute;
+   top: 190px;
+   right: 35px;
+   z-index: 1;
+}
+
+
+/* Add this CSS to your existing questions.css file */
+
 
 /* Style for the container holding the tags */
 .main-tabs {
-  display: flex;
-  flex-wrap: wrap;
+display: flex;
+flex-wrap: wrap;
 }
+
 
 /* Style for individual tag boxes */
 .main-tab {
-  margin-right: 10px;
-  margin-bottom: 10px;
+margin-right: 10px;
+margin-bottom: 10px;
 }
+
 
 /* Style for tag links */
 .main-tab a {
-  display: inline-block;
-  padding: 10px 20px;
-  background-color: #f0f0f0;
-  color: #333;
-  text-decoration: none;
-  border-radius: 8px;
-  transition: background-color 0.3s ease;
+display: inline-block;
+padding: 10px 20px;
+padding: 25px 35px;
+background-color: #f0f0f0;
+color: #333;
+text-decoration: none;
+border-radius: 9px;
+transition: background-color 0.3s ease;
+padding-block: 20px;
 }
+
 
 /* Hover effect for tag links */
 .main-tab a:hover {
-  background-color: #464141;
+background-color: #ddd;
 }
+
 
 /* Style for pagination container */
 .container {
-  margin-top: 20px;
+margin-top: 20px;
 }
+
 
 /* Style for pagination links */
 .pagination {
-  display: inline-block;
-  margin: 0;
-  padding: 0;
+display: inline-block;
+margin: 0;
+padding: 0;
 }
+
 
 /* Style for individual pagination links */
 .pagination li {
-  display: inline;
-  margin-right: 5px;
+display: inline;
+margin-right: 5px;
 }
+
 
 /* Style for active pagination link */
 .pagination li.active a {
-  background-color: #007bff;
-  color: #fff;
-  padding: 6px 12px;
-  border-radius: 4px;
+background-color: #007bff;
+color: #fff;
+padding: 6px 12px;
+border-radius: 4px;
 }
+
 
 /* Style for disabled pagination link */
 .pagination li.disabled a {
-  color: #6c757d;
-  cursor: not-allowed;
+color: #6c757d;
+cursor: not-allowed;
 }
 
+
+
+
+
+
 .class-box {
-  background-color: #f0f0f0;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  padding: 20px;
-  margin: 20px;
-  width: 200px;
-  height: 200px;
-  font-size: 30px;
- 
+background-color: #f0f0f0;
+border-radius: 8px;
+box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+padding: 20px;
+margin: 20px;
+width: 250px;
+height: 250px;
+font-size: 18px;
+
 }
 .class-box h2 {
-  font-size: 18px;
-  margin-top: 0;
-  margin-bottom: 10px;
+font-size: 18px;
+margin-top: 0;
+margin-bottom: 10px;
+}
+
+
+
+
+/* .classroom-box {
+border: 1px solid #ddd;
+border-radius: 5px;
+padding: 15px;
+margin-bottom: 15px;
+} */
+
+
+.classroom-header {
+display: flex;
+justify-content: space-between;
+align-items: center;
+margin-bottom: 15px;
+}
+
+
+.classroom-title {
+margin: 0;
+font-size: 1.5em;
+color: #333;
+}
+
+
+.classroom-icons {
+display: flex;
+margin-left: 90px;
+}
+
+
+.classroom-icons i {
+font-size: 1.5em;
+margin-left: 10px;
+margin-top: 180px;
+margin-top: 160px;
+color: #777;
+cursor: pointer;
+}
+
+
+.classroom-icons i:hover {
+color: #333;
+}
+
+
+.blue-band {
+background-color:#cfcbcb; /* The blue color for the band */
+height: 90px; /* The height of the band */
+border-radius: 8px;
+padding-left: 10px;
+padding-right: 10px;
 }

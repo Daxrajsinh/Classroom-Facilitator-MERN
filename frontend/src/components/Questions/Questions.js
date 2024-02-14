@@ -156,46 +156,103 @@ export default function Questions() {
 
     return (
         <>
-            <div style={{ height: "100%", marginTop: "13vh", zIndex: 1, backgroundColor: "white" }}>
-        <div className="">
-          <div className="stack-index">
-            <div className="stack-index-content">
-              <Sidebar />
-              <div className="main">
-                <div className="main-container">
-                  <div className="main-top">
-                    <h2>All Classrooms</h2>
-                  </div>
-                  <div className='main-desc'>
-                    <div className="main-filter">
-                      <div className="main-tabs">
-                        {/* for admin */}
-                        {/* {tags.map(tag => (
-                          <div key={tag} className="main-tab">
-                            <NavLink to={`/classroom/${tag}`}>{tag}</NavLink>
+          <link
+            href="https://fonts.googleapis.com/icon?family=Material+Icons"
+            rel="stylesheet"
+          ></link>
+          <div
+            style={{
+              height: "100%",
+              marginTop: "13vh",
+              zIndex: 1,
+              backgroundColor: "white",
+            }}
+          >
+            <div className="">
+              <div className="stack-index">
+                <div className="stack-index-content">
+                  <Sidebar />
+                  <div className="main">
+                    <div className="main-container">
+                      <div className="main-top">
+                        <h2>Your Classrooms</h2>
+                      </div>
+                      <div className="main-desc">
+                        <div className="main-filter">
+                          <div className="main-tabs">
+                            {userTags.map((tag) => (
+                              //   <div key={tag} className="main-tab">
+                              // <div key={tag} class="class-box">
+                              // <NavLink to={`/classroom/${tag}`}>{tag}</NavLink>
+                              <div className="classroom-box">
+                                <div className="classroom-header">
+                                  {/* <h2 class="classroom-title">Classroom Name</h2> */}
+                                  <br></br>
+                                  <br></br>
+                                  <br></br>
+                                  <br></br>
+                                  <div key={tag} class="class-box">
+                                    <div class="blue-band">
+                                      {/* <div className="classnav"> */}
+                                        <NavLink to={`/classroom/${tag}`} >
+                                          {tag}
+                                        </NavLink>
+                                      {/* </div> */}
+                                     
+    
+    
+                                      <div class="classroom-icons">
+                                        <i class="material-icons">people</i>
+                                        <i class="material-icons">notifications</i>
+                                        <i class="material-icons">settings</i>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <br></br>
+                                  {/* <!-- add more content here --> */}
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                        ))} */}
-
-                        {/* for users */}
-                        {userTags.map(tag => (
-                            <div key={tag} className="class-box">
-                                <NavLink to={`/classroom/${tag}`}>{tag}</NavLink>
+                        </div>
+                      </div>
+    
+    
+                      {/* <div>
+                        {tags.map((tag) => (
+                          <div key={tag} class="class-box">
+                            <NavLink to={`/classroom/${tag}`}>{tag}</NavLink>
+                            <div class="classroom-box">
+                              <div class="classroom-header">
+                                <h2 class="classroom-title">Classroom Name</h2>
+                                <div class="classroom-icons">
+                                  <i class="material-icons">people</i>
+                                  <i class="material-icons">notifications</i>
+                                  <i class="material-icons">settings</i>
+                                </div>
+                              </div>
+                             
                             </div>
+                          </div>
                         ))}
+                      </div> */}
+    
+    
+                      {/* Pagination component */}
+                      <div className="container">
+                        <Pagination
+                          postsPerPage={postPerPage}
+                          totalPosts={questions.length}
+                          paginate={paginate}
+                        />
                       </div>
                     </div>
-                  </div>
-                  {/* Pagination component */}
-                  <div className="container">
-                    <Pagination postsPerPage={postPerPage} totalPosts={questions.length} paginate={paginate} />
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
-        </>
+    </>
 
     )
 }
