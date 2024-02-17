@@ -85,9 +85,9 @@ export default function MyQuestions() {
                     <input type="date" name="startDate" onChange={onChange} /> 
                     <strong Style="display:inline">To</strong>
                     <input type="date" name="endDate" onChange={onChange} />
-                    <strong Style="display:inline">and in tag:</strong>
+                    <strong Style="display:inline">and in Classroom:</strong>
                     <select name="tags" onChange={onChange} >
-                        <option value="none" selected disabled hidden>select a tag</option>
+                        <option value="none" selected disabled hidden>select</option>
                         {usedTags.map(tag => <option value={tag}>{tag}</option>)}
                     </select>
                 </div>

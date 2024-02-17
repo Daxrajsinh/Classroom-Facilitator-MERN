@@ -150,6 +150,12 @@ body {
     margin-bottom: 0;
   }
   
+  .carousel-image {
+    width: 600px; /* Set your desired fixed width */
+    height: 400px; /* Set your desired fixed height */
+    object-fit: cover; /* Ensure images cover the fixed dimensions */
+  }
+
   .job-search-form .search-category-container .styled-select > select {
     background: transparent;
     font-size: 14px;

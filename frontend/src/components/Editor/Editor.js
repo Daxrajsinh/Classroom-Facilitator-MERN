@@ -66,17 +66,17 @@ export default function Editor(props) {
             <div className="container mb-5" Style="width:70%; display:block; margin:auto;">
                 <div class="card mt-5" Style="background-color:hsl(206,100%,97%);">
                     <div class="card-header">
-                        <h3><b>Ask a Public Question</b></h3>
+                        <h3><b>Ask a Question</b></h3>
                     </div>
                     <div class="card-body">
                         <h5 class="card-title">Writing a Good Question</h5>
-                        <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p>
+                        <p class="card-text">You're ready to ask a classroom-related question and this form will help guide you through the process.</p>
                         <h5>Steps</h5>
                         <ul>
                             <li>Summarize your problem in a one-line title.</li>
                             <li>Describe your problem in more detail.</li>
                             <li>Describe what you tried and what you expected to happen.</li>
-                            <li>Add “tags” which help surface your question to members of the community.</li>
+                            <li>Add “Classroom name” which help surface your question to members of the community.</li>
                         </ul>
                     </div>
                 </div>
@@ -90,7 +90,6 @@ export default function Editor(props) {
                                 <input type="text" class="form-control" name="title" onChange={onChange} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" />
                                 <small id="emailHelp" class="form-text text-muted">Enter Your title in few Words</small>
                             </div>
-
                         </div>
                     </div>
 
@@ -107,9 +106,9 @@ export default function Editor(props) {
                     <div class="card mt-3">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Question Tags</label>
-                                <input type="text" name="tags" onChange={onChange} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Tags" />
-                                <small id="emailHelp" class="form-text text-muted">Enter Question Tags</small>
+                                <label for="exampleInputEmail1">Classroom :</label>
+                                <br></br>
+                                <input type="text" name="tags" onChange={onChange} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a classroom name" />        
                             </div>
                         </div>
                     </div>

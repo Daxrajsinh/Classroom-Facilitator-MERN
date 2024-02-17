@@ -1,16 +1,20 @@
-import React from 'react';
+// Sidebar.js
+import React, { useState } from 'react';
 import './Sidebar.css';
 import { Public, AccountCircle } from '@mui/icons-material';
-import { NavLink } from 'react-router-dom'
+import { NavLink } from 'react-router-dom';
 
 export default function Sidebar() {
+    const [collapsed, setCollapsed] = useState(false);
+
+    const toggleSidebar = () => {
+        setCollapsed(!collapsed);
+    };
+
     return (
-        <div className='sidebar'>
+        <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
             <div className="sidebar-container">
                 <div className="sidebar-options">
-                    <div className="sidebar-option">
-                        <NavLink to="/">Home</NavLink>
-                    </div>
                     <div className="sidebar-option">
                         <div className="link">
                             <div className="link-tag">
@@ -25,6 +29,9 @@ export default function Sidebar() {
                     </div>
                 </div>
             </div>
+            <button className="toggle-button" onClick={toggleSidebar}>
+                {collapsed ? '»' : '«'}
+            </button>
         </div>
-    )
+    );
 }

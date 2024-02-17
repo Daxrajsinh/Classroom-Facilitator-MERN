@@ -104,8 +104,8 @@ const [userTags, setUserTags] = useState([]);
                 Options
               </NavLink>
               <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{ color: 'black' }}>
-                <li><NavLink className="dropdown-item" to="/questions">Questions</NavLink></li>
-                <li><NavLink className="dropdown-item" to="/editor">Code Editor</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/questions">Classrooms</NavLink></li>
+                <li><NavLink className="dropdown-item" to="/editor">Ask a Question</NavLink></li>
                 <li><hr className="dropdown-divider" /></li>
               </ul>
             </li>

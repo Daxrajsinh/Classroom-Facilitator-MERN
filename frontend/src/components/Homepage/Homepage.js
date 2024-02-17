@@ -33,18 +33,43 @@ function Homepage() {
                     <div className="row">
                         <div className="col-lg-6 col-md-12 col-xs-12 mx-4">
                             <div className="contents">
-                                <h2 className="head-title">DoubtOut <br /><small>- A Student Community and Doubt Solving Platform</small></h2>
+                                <h2 className="head-title">DoubtOut <br /><h3>A Student Classroom Faciliator and Doubt Solving Platform</h3></h2>
+                                <br></br>
                                 <p>Find the best answer to your question, help others. <b>DoubtOut</b> is a community-based space to find and contribute answers to questions asked by your classmates !</p>
                             </div>
-                            <div className="text-left">
+                            <div className="text-center">
                                 {/* Bind handleGetStarted function to onClick event */}
                                 <button onClick={handleGetStarted} className="btn btn-primary started-btn">Get Started</button>
                             </div>
                         </div>
                         <div className="col-lg-5 col-md-12 col-xs-12 mx-3">
-                            <div className="intro-img">
-                                <img src={doubt} alt="Not Loaded" />
-                            </div>
+                        <div id="carouselExampleIndicators" className="carousel slide" data-ride="carousel">
+    <ol className="carousel-indicators">
+        <li data-target="#carouselExampleIndicators" data-slide-to="0" className="active"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
+        <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
+    </ol>
+    <div className="carousel-inner">
+        <div className="carousel-item active">
+            <img className="d-block w-100 carousel-image" src="https://www.yourtango.com/sites/default/files/images/brain.jpg" alt="First slide"/>
+        </div>
+        <div className="carousel-item">
+            <img className="d-block w-100 carousel-image" src="https://st2.depositphotos.com/5178011/8137/v/450/depositphotos_81374190-stock-illustration-doubting-man.jpg" alt="Second slide"/>
+        </div>
+        <div className="carousel-item">
+            <img className="d-block w-100 carousel-image" src="https://i1.wp.com/blog.doubtbuddy.com/wp-content/uploads/2021/10/doubttt.jpg?resize=970%2C667&ssl=1" alt="Third slide"/>
+        </div>
+    </div>
+    <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
+        <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span className="sr-only">Previous</span>
+    </a>
+    <a className="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
+        <span className="carousel-control-next-icon" aria-hidden="true"></span>
+        <span className="sr-only">Next</span>
+    </a>
+</div>
+
                         </div>
                     </div>
                 </div>

@@ -2,8 +2,8 @@
     display:flex;
     padding: 20px;
     height: 100%;
-    flex: 0.5;
-    max-width: 150px;
+    flex: 0.2;
+    max-width: 120px;
     border-right: 1px solid #ddd;
 }
 
