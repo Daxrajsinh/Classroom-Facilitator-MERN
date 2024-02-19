@@ -3,7 +3,7 @@ import { useParams } from 'react-router-dom';
 import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
 import { useNavigate } from 'react-router-dom';
-
+import OpenAI from "openai";
 
 export default function Content(props) {
 
@@ -21,6 +21,13 @@ export default function Content(props) {
     const [loginstatus, setloginstatus] = useState(false);
     const [quevoteStatus, setqueVoteStatus] = useState({});
     const [queVote, setQueVote] = useState();
+    const [generatedAnswer, setGeneratedAnswer] = useState("");
+
+
+    const openai = new OpenAI({
+        apiKey: "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",
+        dangerouslyAllowBrowser: true,
+      });
 
 
     // to show the comment box
@@ -87,7 +94,36 @@ export default function Content(props) {
         setValue(newvalue);
     };
 
-
+    const fetchGeneratedAnswer = async (questionText) => {
+        try {
+            const response = await openai.chat.completions.create({
+                model: "gpt-3.5-turbo",
+                messages: [
+                    {
+                        "role": "user",
+                        "content": questionText
+                    }
+                ],
+                temperature: 1,
+                max_tokens: 256,
+                top_p: 1,
+                frequency_penalty: 0,
+                presence_penalty: 0,
+            });
+    
+            if (response.choices && response.choices.length > 0) {
+                return response.choices[0].message.content;
+            } else {
+                console.error('Invalid response format:', response);
+                return 'Failed to generate answer';
+            }
+        } catch (error) {
+            console.error('Error fetching answer:', error);
+            return 'Failed to generate answer';
+        }
+    };
+    
+    
 
 
     const handleSubmit = async (e, id) => {
@@ -323,16 +359,52 @@ export default function Content(props) {
         }).then(response => response.json()).then(data => setComment(data))
     }
 
+    // const fetchQuestionAndAnswer = async (id) => {
+    //     try {
+    //         const response = await fetch(`http://localhost:8000/api/question/fetchQueById/${id}`, {
+    //             method: "POST",
+    //             headers: {
+    //                 'Content-Type': 'application/json'
+    //             }
+    //         });
+    //         const data = await response.json();
+    //         setQuestion(data);
+    //         setHtml(parse(data.question));
+
+    //         // Fetch AI-generated answer
+    //         const generatedAns = await fetchGeneratedAnswer(data.title); // Assuming data.title contains the question text
+    //         setGeneratedAnswer(generatedAns);
+
+    //         // Fetch answers
+    //         fetchAnswers(id);
+    //     } catch (error) {
+    //         console.error('Error fetching question and answer:', error);
+    //     }
+    // };
 
     useEffect(() => {
         isLoggedIn();
         fetchQuestion(params.type);
         fetchAnswers(params.type);
+        // fetchQuestionAndAnswer(params.type);
         fetchVotes();
         fetchQueVotes(params.type);
         // convertToHTML();
     }, [state, voteStatus, quevoteStatus, question])
 
+    useEffect(()=> {
+        // Fetch AI-generated answer when the component mounts
+        const fetchAIAnswer = async () => {
+            try {
+                // Assuming question.title contains the question text
+                const generatedAns = await fetchGeneratedAnswer(question.title);
+                setGeneratedAnswer(generatedAns);
+            } catch (error) {
+                console.error('Error fetching AI-generated answer:', error);
+            }
+        };
+        fetchAIAnswer();
+    }, [])
 
     //######################################
     const sortByVotes = (a, b) => {
@@ -417,7 +489,14 @@ export default function Content(props) {
                 }}
                 /><hr />
 
+                {generatedAnswer && (
+                    <div className="generated-answer">
+                        <h4>AI Generated Answer:</h4>
+                        <p>{generatedAnswer}</p>
+                    </div>
+                )}
 
+                <br></br>
                 <h4>{answers.length}  Answers</h4>
                 {answers.length > 0 && (
                     <div className='mt-5'>
@@ -508,7 +587,6 @@ export default function Content(props) {
 
                     </div>
                 )}
-           
                 <h4>Your Answer</h4>
                 <form onSubmit={(e) => handleSubmit(e, question._id)} method='POST'>
                     <JoditEditor

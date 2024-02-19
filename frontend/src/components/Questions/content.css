@@ -3,14 +3,17 @@
 }
 .main-desc{
     display: flex;
+    /* position: relative; */
     width: 100%;
 }
+
 
 .info{
     display: flex;
     align-items: center;
     font-size: small;
 }
+
 
 .info > p{
     color:rgba(0,0,0,0.4);
@@ -29,12 +32,14 @@
     margin : 5px 0;
 }
 
+
 .question{
     display: flex;
     width:100%;
     padding:20px 0px;
     border-bottom: 1px solid #eee;
 }
+
 
 .question-container{
     display: flex;
@@ -43,10 +48,12 @@
     width:100%;
 }
 
+
 .question-left{
     display: flex;
     margin-right: 30px;
 }
+
 
 .all-options{
     display: flex;
@@ -56,6 +63,7 @@
     font-size: small;
 }
 
+
 .all-option{
     display: flex;
     flex-direction: column;
@@ -63,9 +71,11 @@
     margin-bottom: 10px;
 }
 
+
 .all-option > p{
     font-size: large;
 }
+
 
 .question-body{
     display: flex;
@@ -73,11 +83,13 @@
     width:100%;
 }
 
+
 .question-body > a{
     color: #0151f0d8;
     font-size:1.1rem;
     margin-bottom: 10px;
 }
+
 
 .question-tags{
     margin:10px 5px;
@@ -86,27 +98,32 @@
     border-radius: 3px;
 }
 
+
 .author{
     display: flex;
     flex-direction: column;
     margin-left: auto;
 }
 
+
 .author > small{
     color:rgba(0,0,0,0.7);
     margin-bottom: 5px;
 }
+
 
 .auth-details{
     display: flex;
     align-items: center;
 }
 
+
 .auth-details > p{
     margin-left: 5px;
     font-size:small;
     color:#0151f0d8;
 }
+
 
 .comments{
     margin: 10px 0px;
@@ -131,9 +148,11 @@
     border-bottom: 1px solid #eee;
 }
 
+
 .comment > p{
     margin:10px 0px;
 }
+
 
 .comment > p > span{
     padding: 3px;
@@ -141,6 +160,7 @@
     color:#0151f0d8;
     border-radius: 2px;
 }
+
 
 .all-answer{
     display: flex;
@@ -154,6 +174,7 @@
     font-size: 1.3rem;
     font-weight: 300;
 }
+
 
 .all-answer-container{
     display: flex;
@@ -173,4 +194,23 @@ textarea{
     height: 250px;
     margin:10px 0px;
     font-weight: 400;
+}
+
+
+.generated-answer {
+    background-color: #f0fff4; /* Light green background */
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.generated-answer h4 {
+    color: #008000; /* Dark green color for the heading */
+    margin-bottom: 10px;
+}
+
+.generated-answer p {
+    color: #000; /* Black color for the answer text */
+    font-size: 16px;
+    line-height: 1.5;
 }
