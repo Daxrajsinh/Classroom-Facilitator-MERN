@@ -23,6 +23,8 @@ export default function Navbar() {
 //   const [show, setShow] = useState(false);
 const [userTags, setUserTags] = useState([]);
 
+const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
   const isLoggedin = () => {
     if (localStorage.getItem('username') !== null) {
 
@@ -67,19 +69,35 @@ const [userTags, setUserTags] = useState([]);
   const searchQuestion = async (e) => {
     e.preventDefault();
     const que = document.getElementById('searchQue').value;
-    await fetchUserTags(); // Function to get user tags, implement as per your requirement
+
+    if(! isAdmin) {
+      await fetchUserTags();
   
-    await fetch("http://localhost:8000/api/question/search", {
-      method: "POST",
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ keyword: que, userTags })
-    }).then(response => {
-      return response.json();
-    }).then(questions => {
-      navigate("/search", { state: questions });
-    });
+      await fetch("http://localhost:8000/api/question/search", {
+        method: "POST",
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ keyword: que, userTags })
+      }).then(response => {
+        return response.json();
+      }).then(questions => {
+        navigate("/search", { state: questions });
+      });
+    } else {
+        await fetch("http://localhost:8000/api/question/search_admin", {
+          method: "POST",
+          headers: {
+              'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ keyword: que })
+      }).then(response => {
+          return response.json();
+      }).then(questions => {
+          navigate("/search", { state: questions });
+      })
+    }
+    
   }
 
   useEffect(() => {
@@ -118,9 +136,11 @@ const [userTags, setUserTags] = useState([]);
           <div className="collapse navbar-collapse" id="navbarScroll" >
           {loginStatus && (
             <form className="d-flex" style={{ width: 500 }} onSubmit={searchQuestion}>
-              <input className="form-control me-2" id="searchQue" type="search" placeholder="Search" aria-label="Search" />
-              <button className="btn btn-outline-primary" type="submit">Search</button>
+                <input className="form-control me-2" id="searchQue" type="search" placeholder="Search" aria-label="Search" />
+                <button type="submit" style={{ background: 'none', border: 'none', padding: 0, fontSize: '1rem' }}>🔍</button>
             </form>
+        
+        
           )}
             <div className="searchbar">
 
@@ -134,7 +154,7 @@ const [userTags, setUserTags] = useState([]);
 
               </ul>
 
-            {loginStatus && (localStorage.getItem("Usertype") === 'user') && (<NavLink to='/profile' className='btn btn-white mr-2'>Hey, {localStorage.getItem("username")} !</NavLink>)}
+            {loginStatus && (<NavLink to='/profile' className='btn btn-white mr-2'>Hey, {localStorage.getItem("username")} !</NavLink>)}
             {/* <button className='btn btn-white mr-2'><i className="fa fa-home"></i></button> */}
 
             {/* <button className='btn btn-white  mr-2' onClick={() => setShow(!show)}><i className="fas fa-bell"></i></button> */}

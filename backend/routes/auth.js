@@ -79,31 +79,27 @@ router.post('/login', [
     body('email', 'Enter a valid email').isEmail(),
     body('password', 'Enter a password it can not be blank').exists(),
 ], async (req, res) => {
+    console.log('Login request body:', req.body);
 
-    const error = validationResult(req);
-
-    if (!error.isEmpty()) {
-        return res.status(400).json({ error: error.array() });
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+        console.log('Validation errors:', errors.array());
+        return res.status(400).json({ error: errors.array() });
     }
 
-    // Using Destructuring method of javascript
     const { email, password } = req.body;
 
     try {
-
         let admin = await Admin.findOne({ email });
-
         if (!admin) {
             let user = await User.findOne({ email });
-
             if (!user) {
                 return res.status(400).json({ error: "Please Enter Correct login Credentials" });
             }
 
             const passwordCompare = await bcrypt.compare(password, user.password);
-
             if (!passwordCompare) {
-                return res.status(400).json({ error: "enter Correct login Credentials" });
+                return res.status(400).json({ error: "Incorrect password" });
             }
 
             const data = {
@@ -114,21 +110,15 @@ router.post('/login', [
             }
 
             const authToken = jwt.sign(data, JWT_SECRET);
-            //res.json({authToken});
             localStorage.setItem('token', authToken);
             localStorage.setItem('username', user.username);
             localStorage.setItem('since', user.date);
 
-            req.body.authtoken = authToken;
-            // req.body.userType = user.type;
-
-            return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username, "userType": "user", "date":user.date });
+            return res.status(200).json({ 'success': authToken, 'username': user.username, "userType": "user", "date": user.date });
         }
 
-        const adminPassword = await bcrypt.compare(password, admin.password);
-
-        if (!adminPassword) {
-            return res.status(400).json({ error: "enter Correct login Credentials" });
+        if (admin.password !== password) {
+            return res.status(400).json({ error: "Incorrect password" });
         }
 
         const admindata = {
@@ -139,28 +129,15 @@ router.post('/login', [
         }
 
         const authToken = jwt.sign(admindata, JWT_SECRET);
-        //res.json({authToken});
         localStorage.setItem('token', authToken);
-        //localStorage.setItem('username', user.username);
-        
-      
-        req.body.authtoken = authToken;
-        // req.body.userType = user.type;
-
-    //    return res.status(200).json({ 'success': req.body.authtoken, 'username': user.username ,'date':user.date});
         localStorage.setItem('username', admin.username);
 
-        req.body.authtoken = authToken;
-        // req.body.userType = user.type;
-
-        return res.status(200).json({ 'success': req.body.authtoken, 'username': admin.username, "userType" : "admin"});
-
-
+        return res.status(200).json({ 'success': authToken, 'username': admin.username, "userType": "admin" });
+    } catch (error) {
+        console.error('Error:', error.message);
+        return res.status(500).json({ error: "Internal server error" });
     }
-    catch (error) {
-        console.error(error.message);
-        res.status(400).json({ error: "Internal server error" });
-    }
-})
+});
+
 
 module.exports = router

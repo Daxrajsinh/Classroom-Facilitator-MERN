@@ -31,16 +31,17 @@ function Login() {
       body: JSON.stringify({ email: credentials.email, password: credentials.password }),
     });
     const json = await response.json()
-
+    console.log(json.userType)
     if (json.success != null) {
       setState(true);
       window.scrollTo(0, 0);
 
       localStorage.setItem("username", json.username);
-
+      
       if (json.userType === "admin") {
+        localStorage.setItem("isAdmin", true);
         setTimeout(() => {
-          navigate("/adminHome");
+          navigate("/");
           window.location.reload(true);
         }, 2000);
       }
@@ -58,6 +59,7 @@ function Login() {
       localStorage.setItem("Usertype",json.userType);
 
       if (json.userType === "user") {
+        localStorage.setItem("isAdmin", false);
         setTimeout(() => {
           navigate("/");
           window.location.reload(true);
@@ -128,7 +130,7 @@ function Login() {
                   value="Login"  >Login </button>
               </div>
             </form>
-            <div className="signup">Don't have account?
+            <div className="signup">Don't have account? &nbsp;
               <NavLink to="/register">Signup Now</NavLink>
             </div>
           </div>

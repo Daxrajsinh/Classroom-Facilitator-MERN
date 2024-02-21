@@ -107,7 +107,7 @@ function Register() {
                 value="Register"  >Register</button>
             </div>
           </form>
-          <div className="signup">Already Have Acount?
+          <div className="signup">Already Have Acount? &nbsp;
             <NavLink to="/login">Sigin Now</NavLink>
           </div>
         </div>

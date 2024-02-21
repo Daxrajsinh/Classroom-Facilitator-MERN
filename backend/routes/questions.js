@@ -491,4 +491,25 @@ router.post("/search", async (req, res) => {
     }
 });
 
+//Search questions if admin
+router.post("/search_admin", async(req, res)=> {
+    try {
+        const { keyword } = req.body; // Extract keyword from request body
+
+        let questions = await Question.find({
+            $or: [
+                { title: { $regex : keyword, $options: "i" } }, // Match keyword in the title field
+                { tags: { $regex : keyword, $options: "i" } }   // Match keyword in the tags field
+            ]
+        });
+
+        res.json(questions);
+
+    } catch (e) {
+        console.log(e.message);
+        res.status(500).send("Internal server error");
+    }
+})
+
+
 module.exports = router
