@@ -15,6 +15,8 @@ export default function Search() {
     const [postPerPage] = useState(4);
     const [currentPage, setcurrentPage] = useState(1);
 
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+
     const fetchAnswers = async () => {
         try {
             const response = await fetch("http://localhost:8000/api/answer/fetchanswer", {
@@ -78,7 +80,7 @@ export default function Search() {
                 <div class="">
                     <div className="stack-index">
                         <div className="stack-index-content" >
-                            <Sidebar />
+                            {!isAdmin && <Sidebar />}
                             <div className="main">
                                 <div className="main-container">
                                     <div className="main-top">

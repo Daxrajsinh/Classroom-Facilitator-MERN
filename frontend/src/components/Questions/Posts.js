@@ -11,6 +11,10 @@ export default function Posts({ posts }) {
   const [vote, setVotes] = useState({});
   const [answers, setAnswer] = useState([]);
 
+
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
+  const username = localStorage.getItem('username');
+
   // This function will find the count of No. of answer for a perticular Question
   const FindFrequencyOfAns = async () => {
     const response = await fetch(
@@ -55,6 +59,18 @@ export default function Posts({ posts }) {
 
     let json = await response.json();
     setVotes(json);
+  };
+
+  // Function to delete a question
+  const deleteQuestion = async (id) => {
+    // Add your logic to delete the question here
+    console.log("Deleting question with ID:", id);
+  };
+
+  // Function to update a question
+  const updateQuestion = async (id) => {
+    // Add your logic to update the question here
+    console.log("Updating question with ID:", id);
   };
 
   useEffect(() => {
@@ -115,6 +131,24 @@ export default function Posts({ posts }) {
                     asked {question.date.slice(0, 10)} at{" "}
                     {question.date.slice(12, 16)}{" "}
                     <p Style="color:#0074CC">{question.postedBy} &nbsp;</p>
+                    {(isAdmin || question.postedBy === username) && (
+                      <div>
+                        <div>
+                          <button
+                            onClick={() => deleteQuestion(question._id)}
+                            style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '20px', color: 'grey' }}
+                          >
+                            🗑️
+                          </button>
+                          <button
+                            onClick={() => updateQuestion(question._id)}
+                            style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '20px', color: 'grey' }}
+                          >
+                            ✎
+                          </button>
+                        </div>
+                      </div>
+                    )}
                   </small>
                 </div>
               </div>

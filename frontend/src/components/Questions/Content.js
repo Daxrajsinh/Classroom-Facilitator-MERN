@@ -23,6 +23,8 @@ export default function Content(props) {
     const [queVote, setQueVote] = useState();
     const [generatedAnswer, setGeneratedAnswer] = useState("");
 
+    const isAdmin = localStorage.getItem('isAdmin') === 'true';
+    const username = localStorage.getItem('username');
 
     const openai = new OpenAI({
         apiKey: "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",
@@ -381,6 +383,17 @@ export default function Content(props) {
     //         console.error('Error fetching question and answer:', error);
     //     }
     // };
+      // Function to delete a question
+    const deleteQuestion = async (id) => {
+        // Add your logic to delete the question here
+        console.log("Deleting answer with ID:", id);
+    };
+
+    // Function to update a question
+    const updateQuestion = async (id) => {
+        // Add your logic to update the question here
+        console.log("Updating answer with ID:", id);
+    };
 
     useEffect(() => {
         isLoggedIn();
@@ -394,16 +407,18 @@ export default function Content(props) {
 
     useEffect(()=> {
         // Fetch AI-generated answer when the component mounts
-        const fetchAIAnswer = async () => {
-            try {
-                // Assuming question.title contains the question text
-                const generatedAns = await fetchGeneratedAnswer(question.title);
-                setGeneratedAnswer(generatedAns);
-            } catch (error) {
-                console.error('Error fetching AI-generated answer:', error);
-            }
-        };
-        fetchAIAnswer();
+        if(isAdmin) {
+            const fetchAIAnswer = async () => {
+                try {
+                    // Assuming question.title contains the question text
+                    const generatedAns = await fetchGeneratedAnswer(question.title);
+                    setGeneratedAnswer(generatedAns);
+                } catch (error) {
+                    console.error('Error fetching AI-generated answer:', error);
+                }
+            };
+            fetchAIAnswer();
+        }
     }, [])
 
     //######################################
@@ -489,7 +504,7 @@ export default function Content(props) {
                 }}
                 /><hr />
 
-                {generatedAnswer && (
+                {!isAdmin && generatedAnswer && (
                     <div className="generated-answer">
                         <h4>AI Generated Answer:</h4>
                         <p>{generatedAnswer}</p>
@@ -522,13 +537,33 @@ export default function Content(props) {
                                         <i className="fa fa-check" style={{ fontSize: '25px', color: 'lightgreen' }}></i>
                                     </button>
                                     )}
-
+                        
                                     </div>
                                     <div className="d-flex flex-column flex-shrink-0 col-md-9 mx-0">
                                         <p>{parse(ans.answer)}</p>
 
 
-                                        <small className='d-flex flex-row-reverse'>Posted By : {ans.postedBy}</small>
+                                        <small className='d-flex flex-row-reverse'>Posted By : {ans.postedBy}
+                                        
+                                        {(isAdmin || ans.postedBy === username) && (
+                                            <div>
+                                                <div>
+                                                <button
+                                                    onClick={() => deleteQuestion(ans._id)}
+                                                    style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '18px', color: 'grey' }}
+                                                >
+                                                    🗑️
+                                                </button>
+                                                <button
+                                                    onClick={() => updateQuestion(ans._id)}
+                                                    style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '18px', color: 'grey' }}
+                                                >
+                                                    ✎
+                                                </button>
+                                                </div>
+                                            </div>
+                                        )}
+                                        </small>
 
 
                                         <div className="comments" Style="display:relative; bottom:0px;">
@@ -575,19 +610,11 @@ export default function Content(props) {
   </div>
 ))}
 
-
-
-                    
-                       
-
-
-
-
-
-
                     </div>
                 )}
-                <h4>Your Answer</h4>
+                
+                {!isAdmin && 
+                <h4>Your Answer</h4> &&
                 <form onSubmit={(e) => handleSubmit(e, question._id)} method='POST'>
                     <JoditEditor
                         ref={editor}
@@ -611,7 +638,7 @@ export default function Content(props) {
                    
 
 
-                </form>
+                </form>}
             </div>
         </div>
     )
