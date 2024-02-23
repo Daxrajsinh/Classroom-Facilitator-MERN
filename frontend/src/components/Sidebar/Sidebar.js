@@ -1,18 +1,11 @@
-// Sidebar.js
-import React, { useState } from 'react';
+import React from 'react';
 import './Sidebar.css';
 import { Public, AccountCircle } from '@mui/icons-material';
-import { NavLink } from 'react-router-dom';
+import { NavLink } from 'react-router-dom'
 
 export default function Sidebar() {
-    const [collapsed, setCollapsed] = useState(false);
-
-    const toggleSidebar = () => {
-        setCollapsed(!collapsed);
-    };
-
     return (
-        <div className={`sidebar ${collapsed ? 'collapsed' : ''}`}>
+        <div className='sidebar'>
             <div className="sidebar-container">
                 <div className="sidebar-options">
                     <div className="sidebar-option">
@@ -29,9 +22,6 @@ export default function Sidebar() {
                     </div>
                 </div>
             </div>
-            <button className="toggle-button" onClick={toggleSidebar}>
-                {collapsed ? '»' : '«'}
-            </button>
         </div>
-    );
+    )
 }

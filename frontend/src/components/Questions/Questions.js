@@ -206,12 +206,7 @@ export default function Questions() {
                                                           <NavLink to={`/classroom/${tag}`} >
                                                               {tag}
                                                           </NavLink>
-                                                          <div className="classroom-icons">
-                                                              <i className="material-icons">people</i>
-                                                              <i className="material-icons">notifications</i>
-                                                              <i className="material-icons">settings</i>
-                                                          </div>
-                                                      </div>
+                                                         </div>
                                                   </div>
                                               </div>
                                           </div>
@@ -239,11 +234,6 @@ export default function Questions() {
                                                           <NavLink to={`/classroom/${tag}`} >
                                                               {tag}
                                                           </NavLink>
-                                                          <div className="classroom-icons">
-                                                              <i className="material-icons">people</i>
-                                                              <i className="material-icons">notifications</i>
-                                                              <i className="material-icons">settings</i>
-                                                          </div>
                                                       </div>
                                                   </div>
                                               </div>

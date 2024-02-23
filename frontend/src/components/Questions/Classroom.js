@@ -12,6 +12,7 @@ export default function Classroom() {
   const [postPerPage] = useState(4);
   // const [loading, setLoading] = useState(true);
 
+  const isAdmin = localStorage.getItem('isAdmin') === 'true';
   // Fetch questions by tag name
   const fetchQuestionsByTag = async (tagName) => {
     console.log("Called Fetch questions by tag");
@@ -87,7 +88,7 @@ export default function Classroom() {
             <div className="main-container">
               <div className="main-top">
                 <h2>All Questions</h2>
-                <NavLink to="/editor"><button>Ask Question</button></NavLink>
+                {!isAdmin && <NavLink to="/editor"><button>Ask Question</button></NavLink>}
               </div>
               <div className='main-desc'>
                 <p>{questions.length} Questions</p>
