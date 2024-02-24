@@ -384,16 +384,80 @@ export default function Content(props) {
     //     }
     // };
       // Function to delete a question
-    const deleteQuestion = async (id) => {
-        // Add your logic to delete the question here
+    // const deleteAnswer = async (id) => {
+    //     // Add your logic to delete the question here
+    //     console.log("Deleting answer with ID:", id);
+    // };
+    const deleteAnswer = async (id) => {
         console.log("Deleting answer with ID:", id);
+
+        const confirmDelete = window.confirm("Are you sure you want to delete this answer?");
+        if (!confirmDelete) return;
+
+        try {
+            const response = await fetch(`http://localhost:8000/api/answer/deleteans/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            });
+    
+            const json = await response.json();
+    
+            if (json.status === "deleted") {
+                // Update the UI or take necessary actions upon successful deletion
+                console.log("Answer successfully deleted !")
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error deleting answer:', error);
+            // Handle error
+        }
     };
+    
 
     // Function to update a question
-    const updateQuestion = async (id) => {
-        // Add your logic to update the question here
+    // const updateAnswer = async (id) => {
+    //     // Add your logic to update the question here
+    //     console.log("Updating answer with ID:", id);
+    // };
+
+    const updateAnswer = async (id) => {
         console.log("Updating answer with ID:", id);
+        
+        const updatedAnswer = window.prompt("Enter the updated answer:");
+        const confirmUpdate = window.confirm("Are you sure you want to update this answer?");
+        if (!confirmUpdate) return;
+
+        // Check if updatedAnswer is null or empty
+        if (!updatedAnswer) {
+            console.log("Please enter a valid input to update the answer.");
+            return;
+        }
+
+        try {
+            const response = await fetch(`http://localhost:8000/api/answer/updateans/${id}`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ updatedAnswer }),
+            });
+    
+            const json = await response.json();
+    
+            if (json.status === "updated") {
+                // Update the UI or take necessary actions upon successful update
+                console.log("Answer successfully updated !");
+                window.location.reload();
+            }
+        } catch (error) {
+            console.error('Error updating answer:', error);
+            // Handle error
+        }
     };
+    
+    
 
     useEffect(() => {
         isLoggedIn();
@@ -549,13 +613,13 @@ export default function Content(props) {
                                             <div>
                                                 <div>
                                                 <button
-                                                    onClick={() => deleteQuestion(ans._id)}
+                                                    onClick={() => deleteAnswer(ans._id)}
                                                     style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '18px', color: 'grey' }}
                                                 >
                                                     🗑️
                                                 </button>
                                                 <button
-                                                    onClick={() => updateQuestion(ans._id)}
+                                                    onClick={() => updateAnswer(ans._id)}
                                                     style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '18px', color: 'grey' }}
                                                 >
                                                     ✎

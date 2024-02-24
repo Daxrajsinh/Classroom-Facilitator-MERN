@@ -99,7 +99,7 @@ router.post('/updateque/:id', async(req, res)=>{
 router.post('/deleteque/:id', async(req, res)=>{
     try{
 
-        let deletequestion = await Question.findByIdAndDelete(req.params.id);
+        await Question.findByIdAndDelete(req.params.id);
         await Answer.deleteMany({questionid : req.params.id});
         res.json({status:"deleted"});
         

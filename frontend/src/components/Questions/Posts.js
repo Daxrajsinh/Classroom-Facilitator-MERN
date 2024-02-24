@@ -10,6 +10,8 @@ export default function Posts({ posts }) {
   const [noOfAns, setnoOfAns] = useState({});
   const [vote, setVotes] = useState({});
   const [answers, setAnswer] = useState([]);
+  const [newTitle, setNewTitle] = useState("");
+  const [newQuestion, setNewQuestion] = useState("");
 
 
   const isAdmin = localStorage.getItem('isAdmin') === 'true';
@@ -62,16 +64,79 @@ export default function Posts({ posts }) {
   };
 
   // Function to delete a question
+  // const deleteQuestion = async (id) => {
+  //   // Add your logic to delete the question here
+  //   console.log("Deleting question with ID:", id);
+  // };
   const deleteQuestion = async (id) => {
-    // Add your logic to delete the question here
     console.log("Deleting question with ID:", id);
-  };
+
+    const confirmDelete = window.confirm("Are you sure you want to delete this answer?");
+    if (!confirmDelete) return;
+
+    try {
+        const response = await fetch(`http://localhost:8000/api/question/deleteque/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        });
+
+        const json = await response.json();
+
+        if (json.status === "deleted") {
+            console.log("Question successfully deleted !")
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error('Error deleting question:', error);
+        // Handle error
+    }
+};
 
   // Function to update a question
+  // const updateQuestion = async (id) => {
+  //   // Add your logic to update the question here
+  //   console.log("Updating question with ID:", id);
+  // };
+
   const updateQuestion = async (id) => {
-    // Add your logic to update the question here
     console.log("Updating question with ID:", id);
-  };
+
+    const newTitle = window.prompt("Enter the update question's title:");
+    const newQuestion = window.prompt("Enter the new question to be updated:");
+
+    const confirmUpdate = window.confirm("Are you sure you want to update this question?");
+    if (!confirmUpdate) return;
+    
+    // Check if newTitle or newQuestion is null or empty
+    if (!newTitle || !newQuestion) {
+        console.log("Please enter valid inputs to update the question.");
+        return;
+    }
+
+    try {
+        const response = await fetch(`http://localhost:8000/api/question/updateque/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ title: newTitle, question: newQuestion }),
+        });
+
+        const json = await response.json();
+
+        if (json.status === "updated") {
+            // Update the UI or take necessary actions upon successful update
+            console.log("Question successfully updated !")
+            window.location.reload();
+        }
+    } catch (error) {
+        console.error('Error updating question:', error);
+        // Handle error
+    }
+};
+
 
   useEffect(() => {
     // fetchAllQuestions();

@@ -360,4 +360,24 @@ router.post("/deleteans/:id", async(req, res)=>{
     }
 })
 
+router.post("/updateans/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const { updatedAnswer } = req.body; // Assuming 'updatedAnswer' is the key for the updated answer text
+
+        // Find the answer by ID and update it
+        const updatedAnswerResult = await Answer.findByIdAndUpdate(id, { answer: updatedAnswer }, { new: true });
+
+        if (!updatedAnswerResult) {
+            return res.status(404).json({ error: "Answer not found" });
+        }
+
+        res.json({ status: "updated", updatedAnswer: updatedAnswerResult });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send("Internal Server Error");
+    }
+});
+
+
 module.exports = router
