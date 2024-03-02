@@ -16,11 +16,13 @@ import Classroom from './components/Questions/Classroom';
 
 function App() {
   return (
+    
     <div>
+      
      <BrowserRouter>
       <Navbar />
       <Routes>
-
+      
         <Route path = "/" element = {<Homepage/>}/>
      
         <Route path = "/editor" element = {<Editor/>}/>

@@ -1,6 +1,8 @@
 import React, { useRef, useState } from "react";
 import JoditEditor from "jodit-react";
 import parse from "html-react-parser";
+import '../Questions/questions.css';
+import { Margin } from "@mui/icons-material";
 
 const config = {
     buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
@@ -65,10 +67,11 @@ export default function Editor(props) {
 
             <div className="container mb-5" Style="width:70%; display:block; margin:auto;">
                 <div class="card mt-5" Style="background-color:hsl(206,100%,97%);">
-                    <div class="card-header">
+                    {/* <div class="card-header" style={{backgroundColor:"rgba(154, 184, 154, 0.5)"}}> */}
+                    <div class="card-header" style={{backgroundColor:"rgba(167, 199, 167, 0.5)"}}>
                         <h3><b>Ask a Question</b></h3>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body" style={{backgroundColor:"rgba(190, 227, 190, 0.5)"}}>
                         <h5 class="card-title">Writing a Good Question</h5>
                         <p class="card-text">You're ready to ask a classroom-related question and this form will help guide you through the process.</p>
                         <h5>Steps</h5>
@@ -86,7 +89,7 @@ export default function Editor(props) {
                     <div class="card mb-3 mt-5">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Title</label>
+                                <label for="exampleInputEmail1" style={{marginBottom: "10px"} }>Title</label>
                                 <input type="text" class="form-control" name="title" onChange={onChange} id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter Title" />
                                 <small id="emailHelp" class="form-text text-muted">Enter Your title in few Words</small>
                             </div>
@@ -106,14 +109,14 @@ export default function Editor(props) {
                     <div class="card mt-3">
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="exampleInputEmail1">Classroom :</label>
+                                <label for="exampleInputEmail1" style={{marginBottom: "10px"} }>Classroom :</label>
                                 <br></br>
                                 <input type="text" name="tags" onChange={onChange} class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter a classroom name" />        
                             </div>
                         </div>
                     </div>
 
-                    <button type='submit' className="btn btn-primary mt-5 mb-5">Ask Question</button>
+                    <button type='submit' className="btn-question" style={{marginTop: "10px"} }>Ask Question</button>
                 </form>
             </div>
 

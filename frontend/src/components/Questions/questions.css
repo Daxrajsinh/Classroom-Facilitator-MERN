@@ -1,3 +1,6 @@
+body {
+ font-family: Georgia, 'Times New Roman', Times, serif;
+}
 .all-questions{
   display: flex;
   width:100%;
@@ -199,6 +202,11 @@ height: 250px;
 font-size: 18px;
 
 }
+.class-box:hover{
+  box-shadow: 0 2px 4px rgba(18, 17, 17, 0.671);
+}
+
+
 .class-box h2 {
 font-size: 18px;
 margin-top: 0;
@@ -256,6 +264,29 @@ color: #333;
 background-color:#cfcbcb; /* The blue color for the band */
 height: 90px; /* The height of the band */
 border-radius: 8px;
-padding-left: 10px;
+padding-left: 20px;
 padding-right: 10px;
+padding-top: 10px;
+/* margin-top: 20px; */
+}
+
+.avatar{
+  margin: 28px 0 50px 140px;
+}
+.btn-question{
+  background: rgb(2, 113, 2);
+  padding: 5px 10px 5px 10px;
+}
+
+.btn-question:hover{
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
+}
+
+.btn-answer{
+  background: rgb(2, 113, 2);
+  padding: 5px 10px 5px 10px;
+}
+
+.btn-answer:hover{
+  box-shadow: 0 0 10px rgba(0, 128, 0, 0.5);
 }

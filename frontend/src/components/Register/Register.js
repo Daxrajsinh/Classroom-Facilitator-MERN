@@ -84,31 +84,31 @@ function Register() {
           <header style={{ color: 'black' }}>Register</header>
           <form onSubmit={handleSubmit}>
             <div className="field">
-              <span className="fa fa-user"></span>
-              <input type="text" name='name'
+              <span className="fa fa-user" Style="background : rgba(146, 194, 154, 0.94)"></span>
+              <input type="text" name='name'  Style="background : rgba(146, 194, 154, 0.94)"
                 onChange={onChange} required placeholder="Name" />
             </div>
             <div className="field space">
-              <span className="fa fa-user"></span>
-              <input type="email" name='email'
+              <span className="fa fa-user" Style="background : rgba(146, 194, 154, 0.94)"></span>
+              <input type="email" name='email' Style="background : rgba(146, 194, 154, 0.94)"
                 onChange={onChange} required placeholder="Email " />
 
             </div>
             <div className="field space">
-              <span className="fa fa-lock"></span>
-              <input type="password" name='password' onChange={onChange} className="pass-key" required placeholder="Password" />
+              <span className="fa fa-lock" Style="background : rgba(146, 194, 154, 0.94)"></span>
+              <input type="password" name='password' onChange={onChange} Style="background : rgba(146, 194, 154, 0.94)" className="pass-key" required placeholder="Password" />
             </div>
 
             <div className="pass">
               {/* <a href='/'>Forgot Password?</a> */}
             </div>
             <div className="field">
-              <button type="submit"
-                value="Register"  >Register</button>
+              <button type="submit" Style="background : rgba(146, 194, 154, 0.94);"
+                value="Register">Register</button>
             </div>
           </form>
-          <div className="signup">Already Have Acount? &nbsp;
-            <NavLink to="/login">Sigin Now</NavLink>
+          <div className="signup" >Already Have Acount? &nbsp;
+            <NavLink to="/login" Style="color:rgb(2, 113, 2)" >Sigin Now</NavLink>
           </div>
         </div>
       </div>

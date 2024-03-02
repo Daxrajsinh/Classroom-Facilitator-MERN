@@ -5,17 +5,19 @@ import { NavLink, useNavigate } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import './Navbar.css'
 
-// let nodemailer = require("nodemailer");
-// var well = {
-  // boxShadow: "0px 0px 10px 0px #f0f0f0"
-// }
 var iconstyle = {
-  marginleft: "10px",
-  textDecoration: "none"
+  textDecoration: "none",
 }
 var title = {
-  color: "#0D6EFD",
+  fontSize : "30px" ,
+  color: "rgb(2, 113, 2)",
 }
+var out={
+  color:"#222",
+  fontSize : "30px" ,
+}
+
+
 export default function Navbar() {
   
   const navigate = useNavigate();
@@ -106,12 +108,14 @@ const isAdmin = localStorage.getItem('isAdmin') === 'true';
 
   return (
     <div>
+      {/* <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:9999; width:100%;"> */}
       <nav className="navbar navbar-expand-lg navbar-dark bg-light" Style="box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; position:fixed;top:0; z-index:9999; width:100%;">
         <div className="container-fluid">
-          <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black', paddingTop: "10px" }}>
-            <NavLink to="/" style={iconstyle}>
-              &nbsp;<i style={title}>Doubt</i><b>out</b>
+          <div className="navbar-brand d-flex" style={{ fontWeight: "500", color: 'black',  paddingBottom:"45px"}}>
+            <NavLink to="/" style={iconstyle} >
+              &nbsp;{isAdmin && loginStatus ? <><i style={title}>Admin</i>&nbsp;<b style={out}>Panel</b></> : <><i style={title}>Doubt</i><b style={out}>out</b></>}
             </NavLink>
+            
           </div>
 
 
@@ -124,7 +128,7 @@ const isAdmin = localStorage.getItem('isAdmin') === 'true';
               <ul className="dropdown-menu" aria-labelledby="navbarScrollingDropdown" style={{ color: 'black' }}>
                 <li><NavLink className="dropdown-item" to="/questions">Classrooms</NavLink></li>
                 <li><NavLink className="dropdown-item" to="/editor">Ask a Question</NavLink></li>
-                <li><hr className="dropdown-divider" /></li>
+                {/* <li><hr className="dropdown-divider" /></li> */}
               </ul>
             </li>
           </ul>)}
@@ -137,7 +141,7 @@ const isAdmin = localStorage.getItem('isAdmin') === 'true';
           {loginStatus && (
             <form className="d-flex" style={{ width: 500 }} onSubmit={searchQuestion}>
                 <input className="form-control me-2" id="searchQue" type="search" placeholder="Search" aria-label="Search" />
-                <button type="submit" style={{ background: 'none', border: 'none', padding: 0, fontSize: '1rem' }}>🔍</button>
+                <button type="submit" style={{ background: 'none', border: 'none', padding: 0, fontSize: '1rem' }}>   ❔</button>
             </form>
         
         
@@ -169,15 +173,16 @@ const isAdmin = localStorage.getItem('isAdmin') === 'true';
                 ?
                 (
                   <li class="nav-item">
-                    <button className='btn btn-outline-primary' onClick={logout}>Logout</button>
+                    <button className='btn-logout'  onClick={logout}>Logout</button>
                   </li>
                 )
                 :
                 (<><li class="nav-item">
-                  <NavLink className="nav-link" to="/login" style={{ color: 'black' }}><button className='btn btn-outline-primary'>Login</button></NavLink>
+                  {/* <NavLink className="nav-link" to="/login" style={{ color: 'white' }}><button className='btn btn-outline-primary' Style="background-color: rgb(2, 113, 2) ">Login</button></NavLink> */}
+                  <NavLink className="nav-link" to="/login" style={{ color: 'white' }}><button className='btn-login' Style="background-color: rgb(2, 113, 2) ">Login</button></NavLink>
                 </li>
                   <li class="nav-item">
-                    <NavLink className="nav-link" to="/register" style={{ color: 'black' }}><button className='btn btn-primary'>Register</button></NavLink>
+                    <NavLink className="nav-link" to="/register" style={{ color: 'black' }}><button className='btn-register' Style="background-color: rgb(2, 113, 2)">Register</button></NavLink>
                   </li></>
                 )
               }
@@ -187,5 +192,6 @@ const isAdmin = localStorage.getItem('isAdmin') === 'true';
         </div>
       </nav>
     </div>
+   
   )
 }

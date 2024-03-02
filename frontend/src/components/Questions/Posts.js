@@ -5,6 +5,8 @@ import parse from "html-react-parser";
 import "./questions.css";
 // import { FilterList } from '@mui/icons-material';
 import "../Header/header.css";
+import { FaTrash } from 'react-icons/fa';
+import { Padding } from "@mui/icons-material";
 
 export default function Posts({ posts }) {
   const [noOfAns, setnoOfAns] = useState({});
@@ -13,9 +15,8 @@ export default function Posts({ posts }) {
   const [newTitle, setNewTitle] = useState("");
   const [newQuestion, setNewQuestion] = useState("");
 
-
-  const isAdmin = localStorage.getItem('isAdmin') === 'true';
-  const username = localStorage.getItem('username');
+  const isAdmin = localStorage.getItem("isAdmin") === "true";
+  const username = localStorage.getItem("username");
 
   // This function will find the count of No. of answer for a perticular Question
   const FindFrequencyOfAns = async () => {
@@ -32,21 +33,23 @@ export default function Posts({ posts }) {
     const json = await response.json();
 
     setnoOfAns(json);
-    console.log("No of ans", noOfAns)
+    console.log("No of ans", noOfAns);
   };
 
   const fetchAnswers = async (id) => {
     await fetch(`http://localhost:8000/api/answer/fetchanswer/${id}`, {
-        method: "POST",
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    }).then(response => {
-        return response.json();
-    }).then((data) => {
-        setAnswer(data);
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
     })
-}
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setAnswer(data);
+      });
+  };
 
   const fetchVotes = async () => {
     const response = await fetch(
@@ -71,28 +74,33 @@ export default function Posts({ posts }) {
   const deleteQuestion = async (id) => {
     console.log("Deleting question with ID:", id);
 
-    const confirmDelete = window.confirm("Are you sure you want to delete this answer?");
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this answer?"
+    );
     if (!confirmDelete) return;
 
     try {
-        const response = await fetch(`http://localhost:8000/api/question/deleteque/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        });
-
-        const json = await response.json();
-
-        if (json.status === "deleted") {
-            console.log("Question successfully deleted !")
-            window.location.reload();
+      const response = await fetch(
+        `http://localhost:8000/api/question/deleteque/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
         }
+      );
+
+      const json = await response.json();
+
+      if (json.status === "deleted") {
+        console.log("Question successfully deleted !");
+        window.location.reload();
+      }
     } catch (error) {
-        console.error('Error deleting question:', error);
-        // Handle error
+      console.error("Error deleting question:", error);
+      // Handle error
     }
-};
+  };
 
   // Function to update a question
   // const updateQuestion = async (id) => {
@@ -106,37 +114,41 @@ export default function Posts({ posts }) {
     const newTitle = window.prompt("Enter the update question's title:");
     const newQuestion = window.prompt("Enter the new question to be updated:");
 
-    const confirmUpdate = window.confirm("Are you sure you want to update this question?");
+    const confirmUpdate = window.confirm(
+      "Are you sure you want to update this question?"
+    );
     if (!confirmUpdate) return;
-    
+
     // Check if newTitle or newQuestion is null or empty
     if (!newTitle || !newQuestion) {
-        console.log("Please enter valid inputs to update the question.");
-        return;
+      console.log("Please enter valid inputs to update the question.");
+      return;
     }
 
     try {
-        const response = await fetch(`http://localhost:8000/api/question/updateque/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ title: newTitle, question: newQuestion }),
-        });
-
-        const json = await response.json();
-
-        if (json.status === "updated") {
-            // Update the UI or take necessary actions upon successful update
-            console.log("Question successfully updated !")
-            window.location.reload();
+      const response = await fetch(
+        `http://localhost:8000/api/question/updateque/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ title: newTitle, question: newQuestion }),
         }
-    } catch (error) {
-        console.error('Error updating question:', error);
-        // Handle error
-    }
-};
+      );
 
+      const json = await response.json();
+
+      if (json.status === "updated") {
+        // Update the UI or take necessary actions upon successful update
+        console.log("Question successfully updated !");
+        window.location.reload();
+      }
+    } catch (error) {
+      console.error("Error updating question:", error);
+      // Handle error
+    }
+  };
 
   useEffect(() => {
     // fetchAllQuestions();
@@ -166,21 +178,22 @@ export default function Posts({ posts }) {
                 <NavLink
                   to={{ pathname: `/question/${question._id}` }}
                   className="card-title"
-                  Style="text-decoration:none;color:#0074CC"
+                  Style="text-decoration:none;color:black"
                 >
                   <h4>{question.title}</h4>
                 </NavLink>
-                <div style={{ width: "90%" }}>
+                <div style={{ width: "90%" }}  >
                   <small Style="font-size:1px;">
                     {parse(question.question)[0]}
                   </small>
                 </div>
-          
+
                 <div className="mt-3">
                   {question.tags.split(" ").map((tag) => (
                     <NavLink
                       className="question-tags"
-                      Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;"
+                      Style="color:hsl(120,47%,42%); background-color: hsl(120,46%,92%); border-radius:5px;"
+                      // Style="color:hsl(205,47%,42%); background-color: hsl(205,46%,92%); border-radius:5px;"
                     >
                       {tag}
                     </NavLink>
@@ -192,22 +205,37 @@ export default function Posts({ posts }) {
                                                                           
                                                                             <p>{question.postedBy}</p>
                                                                         </div> */}
-                  <small className="d-flex flex-row-reverse">
+                  <small
+                    className="d-flex flex-row-reverse"
+                    style={{ fontSize: "16px" }}
+                  >
                     asked {question.date.slice(0, 10)} at{" "}
                     {question.date.slice(12, 16)}{" "}
-                    <p Style="color:#0074CC">{question.postedBy} &nbsp;</p>
+                    <p Style="color:rgb(2, 113, 2)">{question.postedBy} &nbsp;</p>
                     {(isAdmin || question.postedBy === username) && (
                       <div>
-                        <div>
+                        <div >
                           <button
                             onClick={() => deleteQuestion(question._id)}
-                            style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '20px', color: 'grey' }}
+                            style={{
+                              border: "none",
+                              background: "none",
+                              cursor: "pointer",
+                              fontSize: "20px",
+                              color: "grey",
+                            }}
                           >
-                            🗑️
+                            <FaTrash/>
                           </button>
                           <button
                             onClick={() => updateQuestion(question._id)}
-                            style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '20px', color: 'grey' }}
+                            style={{
+                              border: "none",
+                              background: "none",
+                              cursor: "pointer",
+                              fontSize: "20px",
+                              color: "grey",
+                            }}
                           >
                             ✎
                           </button>

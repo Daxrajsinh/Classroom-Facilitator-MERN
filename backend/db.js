@@ -1,14 +1,14 @@
 const mongoose = require('mongoose');
-// const mongoURI = "mongodb+srv://mahi:mahi@cluster0.q82jv29.mongodb.net/?retryWrites=true&w=majority";
-const mongoURI = "mongodb+srv://dmj160803:dj12345@cluster0.lephn9p.mongodb.net/?retryWrites=true&w=majority";
+require('dotenv').config();
 
+const mongoURI = process.env.MONGODB_URI;
 
 mongoose.set('strictQuery', false);
 
-const connectToMongo = () =>{
-    mongoose.connect(mongoURI, ()=>{
+const connectToMongo = () => {
+    mongoose.connect(mongoURI, () => {
         console.log("Connected to MongoDB Successfully !");
-    })
-}
+    });
+};
 
 module.exports = connectToMongo;

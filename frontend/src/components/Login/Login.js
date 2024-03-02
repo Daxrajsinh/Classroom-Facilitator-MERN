@@ -115,23 +115,23 @@ function Login() {
             <header style={{ color: 'black' }}> Login</header>
             <form onSubmit={handleSubmit} method='post'>
               <div className="field">
-                <span className="fa fa-user"></span>
-                <input type="email" onChange={onChange} name='email' required placeholder="Email or username" />
+                <span className="fa fa-user" Style="background : rgba(146, 194, 154, 0.94)"></span>
+                <input type="email"  Style="background : rgba(146, 194, 154, 0.94)" onChange={onChange} name='email'  required placeholder="Email or username" />
               </div>
               <div className="field space">
-                <span className="fa fa-lock"></span>
-                <input type="password" onChange={onChange} name='password' className="pass-key" required placeholder="Password" />
+                <span className="fa fa-lock" Style="background : rgba(146, 194, 154, 0.94)"></span>
+                <input type="password" onChange={onChange} name='password' Style="background : rgba(146, 194, 154, 0.94)" className="pass-key" required placeholder="Password" />
               </div>
               <div className="pass">
                 {/* <p>Forgot Password?</p> */}
               </div>
               <div className="field my-2">
                 <button type="submit"
-                  value="Login"  >Login </button>
+                  value="Login" Style="background : rgba(146, 194, 154, 0.94)" >Login </button>
               </div>
             </form>
             <div className="signup">Don't have account? &nbsp;
-              <NavLink to="/register">Signup Now</NavLink>
+              <NavLink to="/register" Style="color:rgb(2, 113, 2)" >Signup Now</NavLink>
             </div>
           </div>
         </div>

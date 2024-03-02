@@ -53,6 +53,7 @@
      flex-direction: column;
      margin: 10px 0;
      font-size: 14px;
+     margin-right: 15px;
  }
 
  a{
@@ -78,17 +79,19 @@
     display: flex;
      align-content: center;
     padding: 5px 0;
-    width: 100%
- }
-
- .link-tag:hover{
-    border-right: 5px solid #0D6EFD;
+    width: 100%;
+    margin: 5px;
  }
 
  .link-tag > .MuiSvgIcon-root{
     font-size: 18px;
     margin-right: 5px;
-    color: #0D6EFD;
+   
+ }
+ .link-tag:hover{
+   background-color: rgb(219, 217, 217);
+   border-radius: 10px;
+   padding: 5px 5px 2px;
  }
 
  .tags{

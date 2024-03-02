@@ -11,11 +11,20 @@
     text-decoration: none;
     color: #000;
  }
+ .sidebar {
+   position: relative; /* Add this to establish a positioning context for the button */
+   display: flex;
+   padding: 20px 0px 10px 10px;
+   height: 100%;
+   flex: 0.2;
+   max-width: 160px;
+   border-right: 1px solid #ddd;
+}
 
  .sideLink:hover {
     color:#000;
     background-color: #ddd;
-    padding: 10px;
+    /* padding: 10px; */
     border-radius: 8px;
     font-weight: 500;
  }
@@ -24,3 +33,5 @@
     color:#000;
     font-size: 14px;
  }
+
+ 

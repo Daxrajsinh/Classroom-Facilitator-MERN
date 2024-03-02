@@ -4,6 +4,8 @@ import parse from "html-react-parser";
 import JoditEditor from "jodit-react";
 import { useNavigate } from 'react-router-dom';
 import OpenAI from "openai";
+import '../Questions/questions.css';
+import { FaTrash } from 'react-icons/fa';
 
 export default function Content(props) {
 
@@ -616,7 +618,7 @@ export default function Content(props) {
                                                     onClick={() => deleteAnswer(ans._id)}
                                                     style={{ border: 'none', background: 'none', cursor: 'pointer', fontSize: '18px', color: 'grey' }}
                                                 >
-                                                    🗑️
+                                                    <FaTrash/>
                                                 </button>
                                                 <button
                                                     onClick={() => updateAnswer(ans._id)}
@@ -695,7 +697,7 @@ export default function Content(props) {
 
 
                     {
-                        loginstatus === true ? (<button type='submit' className="btn btn-primary mt-5 mb-3">Post Your Answer</button>) : <></>
+                        loginstatus === true ? (<button type='submit' className="btn-answer" style={{marginTop:"10px"}}>Post Your Answer</button>) : <></>
                     }
 
 

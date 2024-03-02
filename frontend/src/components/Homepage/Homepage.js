@@ -1,7 +1,7 @@
 import React from 'react';
 import './homepage.css';
-import doubt from './Doubt2.jpg';
-import { NavLink, useNavigate } from 'react-router-dom';
+
+import { useNavigate } from 'react-router-dom';
 
 function Homepage() {
     const navigate = useNavigate();
@@ -39,7 +39,8 @@ function Homepage() {
                             </div>
                             <div className="text-center">
                                 {/* Bind handleGetStarted function to onClick event */}
-                                <button onClick={handleGetStarted} className="btn btn-primary started-btn">Get Started</button>
+                                {/* <button onClick={handleGetStarted} className="btn btn-primary started-btn">Get Started</button> */}
+                                <button onClick={handleGetStarted} className="button-color">Get Started</button>
                             </div>
                         </div>
                         <div className="col-lg-5 col-md-12 col-xs-12 mx-3">
@@ -51,13 +52,14 @@ function Homepage() {
     </ol>
     <div className="carousel-inner">
         <div className="carousel-item active">
-            <img className="d-block w-100 carousel-image" src="https://www.yourtango.com/sites/default/files/images/brain.jpg" alt="First slide"/>
+            <img className="d-block w-100 carousel-image" src="https://i.pinimg.com/564x/e8/80/25/e8802514ddad04c96f1235cc208ba247.jpg" alt="First slide"/>
         </div>
         <div className="carousel-item">
             <img className="d-block w-100 carousel-image" src="https://st2.depositphotos.com/5178011/8137/v/450/depositphotos_81374190-stock-illustration-doubting-man.jpg" alt="Second slide"/>
         </div>
         <div className="carousel-item">
-            <img className="d-block w-100 carousel-image" src="https://i1.wp.com/blog.doubtbuddy.com/wp-content/uploads/2021/10/doubttt.jpg?resize=970%2C667&ssl=1" alt="Third slide"/>
+            {/* <img className="d-block w-100 carousel-image" src="https://i1.wp.com/blog.doubtbuddy.com/wp-content/uploads/2021/10/doubttt.jpg?resize=970%2C667&ssl=1" alt="Third slide"/> */}
+            <img className="d-block w-100 carousel-image" src="https://cdn.vectorstock.com/i/1000x1000/89/60/cute-kid-thinking-idea-on-white-background-vector-47088960.webp" alt="Third slide"/>
         </div>
     </div>
     <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
@@ -74,9 +76,10 @@ function Homepage() {
                     </div>
                 </div>
             </header>
+            {/* <footer className="text-center text-lg-start" Style="background-color: #4e63d7; position:absolute; bottom:0vh;width:100%;"> */}
             <footer className="text-center text-lg-start" Style="background-color: #4e63d7; position:absolute; bottom:0vh;width:100%;">
-                <div className="text-center text-white p-3" Style="background-color: rgba(0, 0, 0, 0.2);">
-                    © 2024 Made With ❤ by Doubtout
+                <div className="text-center text-white p-3" Style="background-color: rgb(25, 113, 2)">
+                    Made With ❤ by Doubtout (© 2024 )
                 </div>
             </footer>
         </>
