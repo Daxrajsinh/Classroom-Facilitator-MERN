@@ -29,7 +29,7 @@ export default function Content(props) {
     const username = localStorage.getItem('username');
 
     const openai = new OpenAI({
-        apiKey: "sk-proj-v3sDgDQ3p9bspgapYmOFT3BlbkFJp4CJklFMcz26ICFBKpAD",
+        apiKey: "",
         dangerouslyAllowBrowser: true,
       });
 
