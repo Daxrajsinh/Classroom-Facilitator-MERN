@@ -21,20 +21,30 @@ DoubtOut is a web application designed to facilitate doubt-solving in educationa
 
 ## Installation
 # Clone the repository
+```bash
 git clone https://github.com/your-username/DoubtOut.git
+```
 
 # Navigate to the project directory
+```bash
 cd DoubtOut
+```
 
 # Install dependencies
+```bash
 npm install
+```
 
 # Change to frontend and backend directory
+```bash
 cd backend
 cd frontend
+```
 
 # Start the backend server & frontend server
+```bash
 npm run start
+```
 
 # Open your web browser and go to http://localhost:3000 to access DoubtOut
 
