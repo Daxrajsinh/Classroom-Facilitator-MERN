@@ -34,15 +34,6 @@ export default function Content(props) {
       });
 
 
-    // to show the comment box
-    const [show, setShow] = useState(false);
-
-
-    // to add a new comment
-    const [comment, setComment] = useState({});
-    const [commentState, setCommentState] = useState(false);
-
-
     const config = useMemo(() => ({
         buttons: ["bold", "italic", "link", "unlink", "ul", "ol", "underline", "image", "font", "fontsize", "brush", "redo", "undo", "eraser", "table"],
     }), []);
@@ -320,49 +311,6 @@ export default function Content(props) {
         setQueVote(json);
     }
 
-
-    const onChange = (e) => {
-        setComment({ ...comment, [e.target.name]: e.target.value })
-    }
-
-
-    const addComment = async (e, id) => {
-        e.preventDefault();
-
-
-        const response = await fetch(`http://localhost:8000/api/comment/addcomment/${id}`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ comment: comment.comment, qid: question._id }),
-        });
-
-
-        const json = await response.json();
-
-
-        if (json["status"] === true) {
-            setCommentState(true);
-            window.scrollTo(0, 0);
-        }
-
-
-    }
-
-
-    const fetchComments = async (id) => {
-        await fetch(`http://localhost:8000/api/comment/fetchComments`, {
-            method: "POST",
-            headers: {
-                'Content-Type': 'application/json'
-            },
-
-
-            body: JSON.stringify({ qid: question._id, ansid: id })
-        }).then(response => response.json()).then(data => setComment(data))
-    }
-
     // const fetchQuestionAndAnswer = async (id) => {
     //     try {
     //         const response = await fetch(`http://localhost:8000/api/question/fetchQueById/${id}`, {
@@ -523,24 +471,6 @@ export default function Content(props) {
                     }
                 }
             )()}
-
-
-            {(
-                () => {
-                    if (commentState === true) {
-
-
-                        return (<>
-                            <div className="alert alert-success alert-dismissible" role="alert">
-                                Your Comment is Posted <strong>Successfully</strong>
-                                <button type="button" className="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>
-                        </>)
-
-
-                    }
-                }
-            )()}
            
             <div className="container" Style="height:100vh;width:70%;display:block; margin:auto;">
 
@@ -643,16 +573,6 @@ export default function Content(props) {
                                                 </p> */}
                                             </div>
                                             {/* <p onClick={() => setShow(!show)}>Add a comment</p> */}
-                                            {
-                                                show && (
-                                                    <div className="title">
-                                                        <form method="POST" onSubmit={(e) => addComment(e, ans._id)}>
-                                                            <textarea type="text" placeholder="Add Your comment.." rows={5} cols={100} name="comment" onChange={onChange}></textarea><br></br>
-                                                            <button type="submit" className='btn btn-primary'>Add comment</button>
-                                                        </form>
-                                                    </div>
-                                                )
-                                            }
                                         </div>
 
 

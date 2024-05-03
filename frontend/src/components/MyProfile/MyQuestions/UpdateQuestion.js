@@ -92,7 +92,7 @@ export default function UpdateQuestion(props) {
                         </div>
                         <div class="card-body">
                             <h5 class="card-title">Writing a Good Question</h5>
-                            <p class="card-text">You’re ready to ask a programming-related question and this form will help guide you through the process.</p>
+                            <p class="card-text">You're ready to ask a programming-related question and this form will help guide you through the process.</p>
                             <h5>Steps</h5>
                             <ul>
                                 <li>Summarize your problem in a one-line title.</li>
