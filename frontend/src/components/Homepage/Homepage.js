@@ -53,14 +53,14 @@ function Homepage() {
                                 </ol>
                                 <div className="carousel-inner">
                                     <div className="carousel-item active">
-                                        <img className="d-block w-100 carousel-image" src="https://i.pinimg.com/474x/6f/8c/e5/6f8ce50f21889cb98afa9021233e9653.jpg" alt="First slide" />
+                                        <img className="d-block w-100 carousel-image" src="https://cdn.vectorstock.com/i/1000x1000/89/60/cute-kid-thinking-idea-on-white-background-vector-47088960.webp" alt="First slide" />
                                     </div>
                                     <div className="carousel-item">
                                         <img className="d-block w-100 carousel-image" src="https://st2.depositphotos.com/5178011/8137/v/450/depositphotos_81374190-stock-illustration-doubting-man.jpg" alt="Second slide" />
                                     </div>
                                     <div className="carousel-item">
                                         {/* <img className="d-block w-100 carousel-image" src="https://i1.wp.com/blog.doubtbuddy.com/wp-content/uploads/2021/10/doubttt.jpg?resize=970%2C667&ssl=1" alt="Third slide"/> */}
-                                        <img className="d-block w-100 carousel-image" src="https://cdn.vectorstock.com/i/1000x1000/89/60/cute-kid-thinking-idea-on-white-background-vector-47088960.webp" alt="Third slide" />
+                                        <img className="d-block w-100 carousel-image" src="https://www.yourtango.com/sites/default/files/images/brain.jpg" alt="Third slide" />
                                     </div>
                                 </div>
                                 <a className="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
