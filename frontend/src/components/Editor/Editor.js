@@ -27,7 +27,7 @@ export default function Editor(props) {
 
         e.preventDefault();
 
-        const response = await fetch('http://localhost:8000/api/question/addquestion', {
+        const response = await fetch(`http://localhost:8000/api/question/addquestion`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

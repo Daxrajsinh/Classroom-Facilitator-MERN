@@ -29,7 +29,7 @@ export default function Content(props) {
     const username = localStorage.getItem('username');
 
     const openai = new OpenAI({
-        apiKey: "",
+        apiKey: process.env.REACT_APP_OPENAI_API_KEY,
         dangerouslyAllowBrowser: true,
       });
 
@@ -471,9 +471,9 @@ export default function Content(props) {
         // convertToHTML();
     }, [state, voteStatus, quevoteStatus, question])
 
-    useEffect(()=> {
+    useEffect(() => {
         // Fetch AI-generated answer when the component mounts
-        if(! isAdmin) {
+        if (!isAdmin && question.title) { // Ensure question title is not null
             const fetchAIAnswer = async () => {
                 try {
                     // Assuming question.title contains the question text
@@ -485,7 +485,8 @@ export default function Content(props) {
             };
             fetchAIAnswer();
         }
-    }, [])
+    }, [isAdmin, question.title]); // Add question.title to the dependencies array
+    
 
     //######################################
     const sortByVotes = (a, b) => {
@@ -570,12 +571,12 @@ export default function Content(props) {
                 }}
                 /><hr />
 
-                {/* {!isAdmin && generatedAnswer && (
+                {!isAdmin && generatedAnswer && (
                     <div className="generated-answer">
                         <h4>AI Generated Answer:</h4>
                         <p>{generatedAnswer}</p>
                     </div>
-                )} */}
+                )}
 
                 <br></br>
                 <h4>{answers.length}  Answers</h4>
