@@ -3,6 +3,9 @@
 ## Overview
 DoubtOut is a web application designed to facilitate doubt-solving in educational environments, inspired by a hybrid model of Google Classroom and StackOverflow. It provides a platform for students and faculty to ask, answer, and upvote questions related to coursework, fostering collaborative learning and knowledge sharing.
 
+![image](https://github.com/Daxrajsinh/Classroom-Faciliator-MERN/assets/107194145/a36a47f2-5119-477e-956a-fcce95121137)
+
+
 ## Features
 - User authentication and authorization
 - Classroom creation and management
